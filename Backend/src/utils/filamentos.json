@@ -1,0 +1,62 @@
+[
+      {
+        "color": "negro",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "blanco",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "rojo",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "plata",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "rubí",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "kiwi",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "violeta",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "arena",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "amarillo",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "verde militar",
+        "tipo": "PLA",
+        "estado": true
+      },
+      {
+        "color": "gris",
+        "tipo": "ABS",
+        "estado": true
+      },
+      {
+        "color": "blanco",
+        "tipo": "PETG",
+        "estado": true
+      }
+    ]
