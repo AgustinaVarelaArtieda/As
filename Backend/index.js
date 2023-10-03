@@ -7,7 +7,6 @@ const {USER,PASSWORD} = process.env
 
 const mongoose = require("mongoose")
 
-
 mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@cluster0.rpunaol.mongodb.net/impresiones3D?retryWrites=true&w=majority`,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
