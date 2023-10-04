@@ -1,0 +1,262 @@
+[
+    {
+        "nombre": "Onix low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696377353/impresiones/onix-modelo3d_fiksje.png",
+        "precioBase": 10601.67,
+        "rellenoBase": 10,
+        "tiempoBase": 889,
+        "tamañoBase":{
+            "x": 200,
+            "y": 200,
+            "z": 55
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Pikachu low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696377480/impresiones/pikachu_low_poly_-modelo3d_gqzry2.png",
+        "precioBase": 496.67,
+        "rellenoBase": 10,
+        "tiempoBase": 46,
+        "tamañoBase":{
+            "x": 30.44,
+            "y": 47.20,
+            "z": 58.95
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Bulbasaur low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696378021/impresiones/bulbasaur_low_poly-modelo3d_qzhtdz.png",
+        "precioBase": 563.33,
+        "rellenoBase": 10,
+        "tiempoBase": 50,
+        "tamañoBase":{
+            "x": 34.43,
+            "y": 42.22,
+            "z": 35.19
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Charmander low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696378187/impresiones/charmander_low_poly-modelo3d_cqcriy.png",
+        "precioBase": 433.33,
+        "rellenoBase": 10,
+        "tiempoBase": 44,
+        "tamañoBase":{
+            "x": 28.57,
+            "y": 47.29,
+            "z": 52.48
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Squirtle low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696378665/impresiones/squirtle_low_poly-modelo3d_tsyz6b.png",
+        "precioBase": 498.33,
+        "rellenoBase": 10,
+        "tiempoBase": 47,
+        "tamañoBase":{
+            "x": 29.70,
+            "y": 47.98,
+            "z": 49.40
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Totodile low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696379045/impresiones/totodile_low_poly-modelo3d_papvu8.png",
+        "precioBase": 566.67,
+        "rellenoBase": 10,
+        "tiempoBase": 52,
+        "tamañoBase":{
+            "x": 34.37,
+            "y": 54.67,
+            "z": 48.68
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Eevee low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696379090/impresiones/eevee_low_poly-modelo3d_cufkup.png",
+        "precioBase": 566.67,
+        "rellenoBase": 10,
+        "tiempoBase": 52,
+        "tamañoBase":{
+            "x": 31.66,
+            "y": 55.91,
+            "z": 59.02
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Snorlax low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696379691/impresiones/snorlax_low_poly_-modelo3d_czvtwa.png",
+        "precioBase": 2078.33,
+        "rellenoBase": 10,
+        "tiempoBase": 167,
+        "tamañoBase":{
+            "x": 80,
+            "y": 65.5,
+            "z": 72
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Chikorita low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380077/impresiones/chikorita_low_poly-modelo3d_urlzi5.png",
+        "precioBase": 486.67,
+        "rellenoBase": 10,
+        "tiempoBase": 40,
+        "tamañoBase":{
+            "x": 46.28,
+            "y": 37.94,
+            "z": 43.38
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Mimikyu low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380162/impresiones/mimikyu_low_poly_-modelo3d_xnfirx.png",
+        "precioBase": 503.33,
+        "rellenoBase": 10,
+        "tiempoBase": 50,
+        "tamañoBase":{
+            "x": 42.4,
+            "y": 45.48,
+            "z": 51.60
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Pichu low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380394/impresiones/pichu_low_poly_-modelo3d_aounh9.png",
+        "precioBase": 221.67,
+        "rellenoBase": 10,
+        "tiempoBase": 25,
+        "tamañoBase":{
+            "x": 34.27,
+            "y": 28.09,
+            "z": 42.70
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Charizard low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380246/impresiones/charizard_low_poly_-modelo3d_jawi0v.png",
+        "precioBase": 1501.67,
+        "rellenoBase": 10,
+        "tiempoBase": 145,
+        "tamañoBase":{
+            "x": 90.79,
+            "y": 60.13,
+            "z": 78.32
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Gengar low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696379963/impresiones/gengar_low_poly_-modelo3d_vgswwa.png",
+        "precioBase": 638.33,
+        "rellenoBase": 10,
+        "tiempoBase": 59,
+        "tamañoBase":{
+            "x": 45.12,
+            "y": 50.02,
+            "z": 50.10
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Dugtrio low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380539/impresiones/dugtrio_low_poly_-modelo3d_vjfupg.png",
+        "precioBase": 1593.33,
+        "rellenoBase": 10,
+        "tiempoBase": 128,
+        "tamañoBase":{
+            "x": 70,
+            "y": 70.14,
+            "z": 48.90
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Torchic low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380759/impresiones/torchic_low_poly_-modelo3d_cydylp.png",
+        "precioBase": 778.33,
+        "rellenoBase": 10,
+        "tiempoBase": 71,
+        "tamañoBase":{
+            "x": 34.43,
+            "y": 39.89,
+            "z": 70
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Teddiursa low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380761/impresiones/teddiursa_low_poly_-modelo3d_ygotp5.png",
+        "precioBase": 715,
+        "rellenoBase": 10,
+        "tiempoBase": 69,
+        "tamañoBase":{
+            "x": 42,
+            "y": 35,
+            "z": 58
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Wobbuffet low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696380837/impresiones/wobbuffet_low_poly_-modelo3d_likng5.png",
+        "precioBase": 1195,
+        "rellenoBase": 10,
+        "tiempoBase": 105,
+        "tamañoBase":{
+            "x": 49.02,
+            "y": 48.26,
+            "z": 70
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Psyduck low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696381052/impresiones/psyduck_low_poly_-modelo3d_w4t1jv.png",
+        "precioBase": 850,
+        "rellenoBase": 10,
+        "tiempoBase": 78,
+        "tamañoBase":{
+            "x": 38.50,
+            "y": 55.53,
+            "z": 54
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Tyranitar low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696381138/impresiones/tyranitar_low_poly_-modelo3d_voazgx.png",
+        "precioBase": 1611.67,
+        "rellenoBase": 10,
+        "tiempoBase": 139,
+        "tamañoBase":{
+            "x": 56,
+            "y": 76.27,
+            "z": 82
+        },
+        "estado": true
+    },
+    {
+        "nombre": "Mudkip low poly",
+        "imagen": "https://res.cloudinary.com/dafxyndon/image/upload/v1696381295/impresiones/mudkip_low_poly-modelo3d_pw8ne8.png",
+        "precioBase": 985,
+        "rellenoBase": 10,
+        "tiempoBase": 87,
+        "tamañoBase":{
+            "x": 37.70,
+            "y": 68,
+            "z": 70
+        },
+        "estado": true
+    }
+]
