@@ -1,9 +1,10 @@
 const Router = require ("express")
 
-const getAllFilamentos=require('../../controllers/filamentos/getAllFilamentos')
+const {handlerGetFilamentos,handlerPutFilamento}=require('../../handlers/filamentos/handlerFilamentos')
 
 const filamentos = Router()
 
-filamentos.get('/',getAllFilamentos)
+filamentos.get('/',handlerGetFilamentos)
+filamentos.put('/:id',handlerPutFilamento)
 
 module.exports = filamentos
