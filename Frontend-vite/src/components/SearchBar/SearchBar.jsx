@@ -1,10 +1,12 @@
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
-import axios from "axios"
+import {useDispatch} from "react-redux/es/hooks/useSelector"
+import {setSearchInput} from "../../Redux/reducers/searchReducer"
 
 const SearchBar = () =>{
     
-    //const navigate = useNavigate() //
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [name, setName] = useState("")
 
     function inputHandleChange(e){
@@ -14,6 +16,8 @@ const SearchBar = () =>{
 
     function handleSubmit(e){
         e.preventDefault()
+        dispatch(setSearchInput(name))
+        navigate("/impresiones")
     }
     
 
