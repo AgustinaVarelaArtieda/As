@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux/es/hooks/useSelector"
+import {useDispatch} from "react-redux"
 import {setSearchInput} from "../../Redux/reducers/searchReducer"
 
 const SearchBar = () =>{
@@ -10,7 +10,7 @@ const SearchBar = () =>{
     const [name, setName] = useState("")
 
     function inputHandleChange(e){
-        e.preventDegault()
+        e.preventDefault()
         setName(e.target.value)
     }
 
