@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Comprar from "../Comprar/Comprar";
 import Contacto from "../Contacto/Contacto";
 import infoImpresion from "../../utils/infoImpresion";
+import { useParams } from "react-router-dom";
 
 export default function DetalleImpresion(){
     const { id } = useParams();
@@ -19,7 +20,7 @@ export default function DetalleImpresion(){
             }
         }
         fetchData();
-    }, [])
+    })
 
     return(
         <div>
