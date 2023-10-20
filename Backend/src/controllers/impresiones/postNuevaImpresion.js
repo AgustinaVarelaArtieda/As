@@ -5,6 +5,7 @@ const nuevaImpresion = async(nombre, imagen, precioBase, rellenoBase, tiempoBase
     if (existente) {
         return "la impresion ya existe"
     } else {
+        const fechaActual = new Date()
         const newImpresion = new Impresion({
             nombre,
             imagen,
@@ -16,7 +17,8 @@ const nuevaImpresion = async(nombre, imagen, precioBase, rellenoBase, tiempoBase
                 y: tamañoBase.y,
                 z: tamañoBase.z
             },
-            estado
+            estado,
+            fecha: fechaActual
         })
             await newImpresion.save()
             return newImpresion

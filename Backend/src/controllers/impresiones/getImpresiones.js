@@ -4,8 +4,8 @@ function getAllImpresiones(req,res,next){   //con paginado, filtrado por nombre 
     
     const {numeroPagina,cantidadPorPagina,tipoOrden,orden,nombre}=req.query
 
-    const skip = (numeroPagina - 1) * cantidadPorPagina; // Cantidad de elementos a omitir  //revisar esta parte, el paginado se hace raro
-    const limite = cantidadPorPagina; // Cantidad de elementos por página
+    const skip = (parseInt(numeroPagina) - 1) * parseInt(cantidadPorPagina);
+    const limite = parseInt(cantidadPorPagina);
 
     const filtrado = {}
 
@@ -14,7 +14,7 @@ function getAllImpresiones(req,res,next){   //con paginado, filtrado por nombre 
     }
 
     Impresion.find(filtrado)
-        .sort({[tipoOrden]: orden}) //orden:se utiliza 1 para ASC y -1 para DESC-tipoOrden: debe ser un string
+        .sort({[tipoOrden?tipoOrden:'nombre']: orden?orden:1}) //orden:se utiliza 1 para ASC y -1 para DESC-tipoOrden: debe ser un string
         .skip(skip)
         .limit(limite)
         .then((impresiones)=>{

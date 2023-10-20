@@ -13,6 +13,7 @@ const impresion = new Schema({
         z: {type: Number, min: 0}
     },
     estado: Boolean,
+    fecha: Date
 })
 
 impresion.set("toJSON",{

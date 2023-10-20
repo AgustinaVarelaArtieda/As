@@ -11,10 +11,16 @@ const dbProducts = async (_req, res, next) =>{
             const filepath = path.join(__dirname, "../../utils/impresiones.json")
             const data = await fs.readFileSync(filepath, "utf8")
             const impresiones = await JSON.parse(data)
-             await impresiones.forEach((item) =>{
-                const newImpresion = new Impresion(item)
-                newImpresion.save()
-            })
+            const currentDate = new Date()
+
+            for (const item of impresiones){
+                const newImpresion = new Impresion({
+                    ...item,
+                    fecha: currentDate,
+                })
+                 await newImpresion.save()
+            }
+
             return res.status(201).json("impresiones guardadas correctamente")
         }
     } catch (error) {
