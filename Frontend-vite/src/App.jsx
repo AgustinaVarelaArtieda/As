@@ -1,6 +1,7 @@
-import {Routes, Route, Router} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import Landing from "./views/Landing/Landing"
 import Home from "./views/Home/Home"
+import Detail from "./views/Detalle/Detail"
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
      <Routes>
         <Route path="/" element={<Landing/>}/>
         <Route path="/impresiones" element={<Home/>}/>
+        <Route path= "/detalle" element={<Detail/>}/>
      </Routes>
    
   )
