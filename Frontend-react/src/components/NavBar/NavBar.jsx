@@ -1,6 +1,11 @@
 import {NavLink} from 'react-router-dom'
+import LoginButton from '../Login/Login';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function NavBar(){
+
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
 
     return (
         <nav className='menu'>
@@ -12,7 +17,9 @@ function NavBar(){
             </ul>
             <ul>
                 <li><NavLink><img alt='Carrito'/></NavLink></li>
-                <li><NavLink><img alt='Usuario'/></NavLink></li>
+                {isLoading ? (<div>...</div>) : (isAuthenticated?  <img src={user.picture} alt={user.name} />:(
+                    <li><LoginButton/></li>
+                ))}
             </ul>
         </nav>
     )

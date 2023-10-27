@@ -47,7 +47,6 @@ function Carousel(){
         fetchData();
     }, []);
     
-    console.log(cards)
     return (
         <Slider {...settings}>
             {cards.map((card,index)=>(
