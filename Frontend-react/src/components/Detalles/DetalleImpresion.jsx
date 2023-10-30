@@ -38,8 +38,8 @@ function DetalleImpresion(props){
                 <h1>{detalle.nombre}</h1>
                 <img src={detalle.imagen} alt={detalle.nombre} />
                 <h2>Medidas</h2>
-                <p>Alto:{detalle?.tamañoBase.z}</p>
-                <p>Ancho:{detalle?.tamañoBase.x}</p>
+                <p>Alto:{detalle?.tamañoBase?.z}</p>
+                <p>Ancho:{detalle?.tamañoBase?.x}</p>
             </div>
             <h3>Colores disponibles:</h3>
                 {colores.message? <h1>{colores.message}</h1>
