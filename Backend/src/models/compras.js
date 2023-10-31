@@ -2,12 +2,15 @@ const mongoose = require("mongoose")
 const {model , Schema} = mongoose
 
 const compras = new Schema({
-    idUser: String,
     impresiones: [{
         type: String
     }],
     precioTotal: Number,
     estado: Boolean,
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 compras.set("toJSON",{

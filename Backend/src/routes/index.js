@@ -3,6 +3,7 @@ const dbProducts = require ("../controllers/impresiones/postAllImpresiones")
 const dbFilamentos  = require ("../controllers/filamentos/postAllFilamentos")
 const impresiones = require ("../routes/impresiones/rutasImpresiones")
 const filamentos = require("../routes/filamentos/rutasFilamentos");
+const usuarios = require("../routes/usuarios/rutasUsuarios");
 
 const router = Router()
 
@@ -17,5 +18,8 @@ router.use("/impresiones", impresiones)
 
 //ruta filamentos
 router.use("/filamentos", filamentos)
+
+//ruta usuarios
+router.use("/usuarios", usuarios);
 
 module.exports = router

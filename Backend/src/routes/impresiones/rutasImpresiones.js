@@ -8,6 +8,6 @@ const impresiones = Router()
 impresiones.get('/',handlerGetImpresiones)
 impresiones.get('/:id',handlerGetImpresionPorId)
 impresiones.post("/", postNuevaImpresionhandler)
-impresiones.put("/id", putImpresionhandler)
+impresiones.put("/:id", putImpresionhandler)
 
 module.exports = impresiones
