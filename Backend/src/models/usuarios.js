@@ -3,12 +3,15 @@ const {model , Schema} = mongoose
 
 const user = new Schema({
     nombre: String,
-    password: String,
     idAuth: String,
     email: String,
     avatar: String,
     estado: Boolean,
     rol: String,
+    compras:[{
+        type: Schema.Types.ObjectId,
+        ref: "Compra"
+    }]
 })
 
 user.set("toJSON",{
