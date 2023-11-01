@@ -9,10 +9,10 @@ const nuevoUsuario = async(nombre,idAuth,email,avatar) => {
         let rol = 'cliente'
     
         if(email==='agusvarela5@gmail.com'||email==='andresinfernoxii@gmail.com'){
-            return rol='administrador'
+            rol='administrador'
         }
     
-        const newUsuario= User.create({
+        const newUsuario= new User({
             nombre,
             idAuth,
             email,

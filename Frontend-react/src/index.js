@@ -33,6 +33,7 @@ root.render(
             redirect_uri: window.location.origin
           }
         }
+        cacheLocation="localstorage"
       >
         <BrowserRouter>
           <App />
