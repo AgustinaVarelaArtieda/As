@@ -1,11 +1,42 @@
 import {NavLink} from 'react-router-dom'
+import { useEffect } from "react";
 import LoginButton from '../Login/Login';
 import { useAuth0 } from '@auth0/auth0-react';
+import {useDispatch} from "react-redux"
+import {setUser} from "../../redux/reducers/userReducer"
+import {LocalStorageCache} from "@auth0/auth0-react"
+import axios from 'axios';
+
+export const cache = new LocalStorageCache()
 
 function NavBar(){
-
+    
+    const dispatch = useDispatch()
     const { user, isAuthenticated, isLoading } = useAuth0();
 
+    const postUsuario = async (nuevoUsuario) =>{
+        try {
+            const response = await axios.post ("/usuarios", nuevoUsuario)
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        if (isAuthenticated && user){
+            let nuevoUsuario = {
+                nombre: user.name,
+                idAuth: user.sub,
+                email: user.email,
+                avatar: user.picture
+            }
+            postUsuario(nuevoUsuario)
+            dispatch(setUser(nuevoUsuario))
+            cache.set("usuario",nuevoUsuario)
+        }
+
+    },[isAuthenticated, user])
 
     return (
         <nav className='menu'>
