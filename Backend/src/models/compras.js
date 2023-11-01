@@ -3,8 +3,9 @@ const {model , Schema} = mongoose
 
 const compras = new Schema({
     impresiones: [{
-        type: String
-    }],
+        type: Schema.Types.ObjectId,
+        ref: "Impresion"
+      }],
     precioTotal: Number,
     estado: Boolean,
     user:{
