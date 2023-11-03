@@ -6,7 +6,7 @@ const infoUsuarioHandler = require("../../handlers/Usuarios/handlerInfoUsuario")
 
 const usuarios = Router()
 
-usuarios.get("/:id", infoUsuarioHandler)
+usuarios.get("/:idAuth", infoUsuarioHandler)
 usuarios.post("/", nuevoUsuarioHandler)
 usuarios.put("/actualizar/:id", actualizarUsuarioHandler)
 
