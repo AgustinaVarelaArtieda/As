@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 export default function MisCompras(props){
     const { idAuth }=props
 
@@ -14,6 +17,7 @@ export default function MisCompras(props){
         };
         fetchData();
     }, []);
+    
     return (
         <div>
             <h1>Mis Compras</h1>
