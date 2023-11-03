@@ -1,4 +1,3 @@
-import MisCompras from "../../components/Compras/MisCompras";
 import Usuario from "../../components/Usuario/Usuario";
 
 export default function PerfilUsuario(){
