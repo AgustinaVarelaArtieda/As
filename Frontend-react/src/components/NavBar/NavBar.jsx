@@ -24,7 +24,7 @@ function NavBar(){
     }
 
     useEffect(()=>{
-        if (isAuthenticated && user){
+        if (isAuthenticated && user && !cache.get("usuario")){
             let nuevoUsuario = {
                 nombre: user.name,
                 idAuth: user.sub,
