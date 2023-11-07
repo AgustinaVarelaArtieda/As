@@ -1,10 +1,10 @@
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {setSearchInput} from "../../redux/reducers/searchReducer1"
 
 const SearchBar = () =>{
-    
+    const busqueda = useSelector(state => state.search)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [name, setName] = useState("")
@@ -18,6 +18,7 @@ const SearchBar = () =>{
         e.preventDefault()
         dispatch(setSearchInput(name))
         navigate("/impresiones")
+        console.log(busqueda)
     }
     
 
