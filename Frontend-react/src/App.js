@@ -5,6 +5,7 @@ import Detail from "./views/Detalle/Detail"
 import PerfilUsuario from "./views/Perfil/PerfilUsuario";
 
 import './App.css';
+import NuevaImpresion from "./components/Formularios/NuevaImpresion/NuevaImpresion";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/impresiones" element={<Home/>}/>
         <Route path= "/detalle/:id" element={<Detail/>}/>
         <Route path="/usuario" element={<PerfilUsuario/>}/>
+        <Route path="/nuevaimpresion" element={<NuevaImpresion/>}/>
      </Routes>
   );
 }
