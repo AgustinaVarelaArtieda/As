@@ -4,6 +4,7 @@ const dbFilamentos  = require ("../controllers/filamentos/postAllFilamentos")
 const impresiones = require ("../routes/impresiones/rutasImpresiones")
 const filamentos = require("../routes/filamentos/rutasFilamentos");
 const usuarios = require("../routes/usuarios/rutasUsuarios");
+const mercadoPago = require ("./compras/rutasCompras")
 
 const router = Router()
 
@@ -21,5 +22,8 @@ router.use("/filamentos", filamentos)
 
 //ruta usuarios
 router.use("/usuarios", usuarios);
+
+//ruta de compras
+router.use ("/compra", mercadoPago )
 
 module.exports = router
