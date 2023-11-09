@@ -1,3 +1,8 @@
+const User =require('../../models/usuarios')
+const Compra=require('../../models/compras')
+
+const mongoose = require("mongoose");
+
 const mercadopago = require ("mercadopago")
 const dotenv = require("dotenv")
 dotenv.config()
@@ -9,7 +14,12 @@ mercadopago.configure({
 const handlerCompras = async (req, res) => {
     
     const producto = req.body
-    
+    const {idAuth}=req.params
+
+    const usuario = await User.findOne({ idAuth })
+    if (!usuario ) {
+      return 'Usuario no encontrado';
+    }
 
     const arrayProductos = producto.map((e) =>{
         return {
@@ -17,18 +27,17 @@ const handlerCompras = async (req, res) => {
             picture_url: e.imagen,              
             unit_price: e.precioBase,
             quantity: e.cantidad,
-            currency_id: "ARS"
+            currency_id: "ARS",
+            id:e.id
         }
     })
 
     try {
 
         const preference = {
-            items: [
-                {
+            items: 
                     arrayProductos
-                },
-            ],
+              ,
             //rutas del front para redirigir en caso de exito o fallo
             back_urls: {
                 success: "http://elpackfeliz",
@@ -37,10 +46,28 @@ const handlerCompras = async (req, res) => {
             },
             auto_return: "approved"
         }
+
+        let total=arrayProductos.reduce((a,e)=>{
+           return a+e.unit_price*e.quantity
+        },0)
+
+        
+        console.log(total, idAuth)
+
+        const arrayProductosIds = arrayProductos.map(e => new mongoose.Types.ObjectId(e.id));
+        const idUsuario= new mongoose.Types.ObjectId(usuario.id)
+
+        const nuevaCompra= new Compra({
+            impresiones: arrayProductosIds,
+            precioTotal: total,
+            estado: true,
+            user:  idUsuario
+        })
+        await nuevaCompra.save()
     
         const {response} = await mercadopago.preferences.create(preference)
-        console.log(response)
-        res.status(200).json(response.init_point)
+        console.log("nueva compra:",nuevaCompra, "id productos:", arrayProductosIds, "usuario id", usuario.id)
+        res.status(200).json(response)
 
 
     } catch (error) {
