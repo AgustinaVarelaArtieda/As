@@ -3,7 +3,7 @@ const handlerCompras = require("../../handlers/compras/handlerCompras")
 
 const mercadoPago = Router()
 
-mercadoPago.post("/", handlerCompras)
+mercadoPago.post("/:idAuth", handlerCompras)
 
 
 module.exports = mercadoPago
