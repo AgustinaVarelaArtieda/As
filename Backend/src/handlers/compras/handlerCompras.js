@@ -63,12 +63,25 @@ const handlerCompras = async (req, res) => {
             estado: true,
             user:  idUsuario
         })
+        
         await nuevaCompra.save()
+        
+        const id = nuevaCompra.id
+
+        await Compra.findById(id).populate("user").populate("impresiones")
+
+        await User.findByIdAndUpdate(usuario.id,
+            {
+                $push:{
+                    compras: id
+                }
+        },{
+            new: true
+        }).populate("compras")
     
         const {response} = await mercadopago.preferences.create(preference)
-        console.log("nueva compra:",nuevaCompra, "id productos:", arrayProductosIds, "usuario id", usuario.id)
-        res.status(200).json(response)
 
+        res.status(200).json(response)
 
     } catch (error) {
         console.error (error.message)
