@@ -24,12 +24,14 @@ export default function MisCompras(props){
             <ul>
                 {miscompras.length>0 ? miscompras.map((compra,index) => (
                     <li key={index}>
-                        {compra.precioTotal}
+                        <p>{compra.precioTotal}</p>
+                        <ul>
                         {compra.impresiones?.map((el,index)=>(
                             <li key={index}>
-                                {el.imagen}
+                                <img src={el.imagen} />
                             </li>
                         ))}
+                        </ul>
                     </li>
                 )): <h2>Realiza tu primera compra!</h2>}
             </ul>
