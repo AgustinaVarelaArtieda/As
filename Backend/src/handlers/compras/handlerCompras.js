@@ -40,9 +40,8 @@ const handlerCompras = async (req, res) => {
               ,
             //rutas del front para redirigir en caso de exito o fallo
             back_urls: {
-                success: "http://elpackfeliz",
-                failure: "http://elpacktriste",
-                pending: "http://elpackesperando"
+                success: "http://localhost:3000/success",
+                failure: "http://localhost:3000/failure",
             },
             auto_return: "approved"
         }
@@ -77,11 +76,10 @@ const handlerCompras = async (req, res) => {
                 }
         },{
             new: true
-        }).populate("compras")
-    
+        }).populate("compras")    
         const {response} = await mercadopago.preferences.create(preference)
 
-        res.status(200).json(response)
+        res.status(200).json(response.init_point)
 
     } catch (error) {
         console.error (error.message)

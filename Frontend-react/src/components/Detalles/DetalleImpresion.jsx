@@ -11,6 +11,7 @@ function DetalleImpresion(props){
     
     const [detalle, setDetalle] = useState({});
     const [colores, setColores] = useState([]);
+    const [cantidad, setCantidad] = useState(1)
 
     useEffect(()=>{
         const fetchData= async()=>{
@@ -24,9 +25,20 @@ function DetalleImpresion(props){
             }
         }
         fetchData();
-    },[])
+    },[id])
 
-    const precio=detalle.precio
+    function handleCantidadSuma () {
+        setCantidad(cantidad+1)
+
+    }
+
+    function handleCantidadResta (){
+        if (cantidad > 1){
+            setCantidad(cantidad-1)
+        }
+    }
+
+    const precio=detalle.precioBase
     const nombr=detalle.nombre
 
     return(
@@ -53,8 +65,13 @@ function DetalleImpresion(props){
                         )
                     })}
                 </>)}
-            <Comprar precio={precio} estoyEnCarrito={false}/>
+            <Comprar precio={precio} estoyEnCarrito={false} id={id} imagen={detalle.imagen} nombre={nombr} cantidad={cantidad} />
             <Contacto nombre={nombr} />
+            <div>
+                <button onClick={handleCantidadSuma}>+</button>
+                <p>{cantidad}</p>
+                <button onClick={handleCantidadResta}>-</button>
+            </div>
             </>)
             }
         </div>

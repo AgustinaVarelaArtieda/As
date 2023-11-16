@@ -1,38 +1,38 @@
-import PropTypes from 'prop-types'
+import {useEffect, useState} from "react"
 
 function Paginacion(props) {
-    
-    Paginacion.propTypes={
-        paginaFuncion:PropTypes.func.isRequired,
-        totalImpresiones:PropTypes.number.isRequired,
-        impresionesPorPagina:PropTypes.number.isRequired,
-        paginaActual:PropTypes.number.isRequired
-    }
+  
 
     const { paginaFuncion, totalImpresiones, impresionesPorPagina, paginaActual } = props;
     
     const numeroPagina = Array.from({ length: Math.ceil(totalImpresiones / impresionesPorPagina) }, (_, i) => i + 1);
   
     function handlePrevPage() {
-      const prevPage = Math.max(paginaActual - 1, 1);
+      const prevPage = paginaActual - 1
+        ;
       paginaFuncion(prevPage);
     }
   
     function handleNextPage() {
-      const nextPage = Math.min(paginaActual + 1, numeroPagina.length);
+      const nextPage = paginaActual + 1;
       paginaFuncion(nextPage);
     }
-  
+
+    useEffect(()=>{
+      paginaFuncion(paginaActual)
+    }, [])
+    
+    console.log(paginaActual)
     return (
       <div>
         <ul>
           <li>
-            <button onClick={handlePrevPage}>Prev</button>
+            <button onClick={handlePrevPage} disabled={paginaActual===1}>Prev</button>
           </li>
           {numeroPagina.map((numero, index) => {
             const primeraPagina = index === 0;
             const ultimaPagina = index === numeroPagina.length - 1;
-            const paginaActiva = numero === paginaActual || Math.abs(numero - paginaActual) === 1;
+            const paginaActiva = numero === paginaActual;
   
             return (
               <li key={index} className={paginaActiva ? "activo" : ""}>
@@ -43,7 +43,7 @@ function Paginacion(props) {
             );
           })}
           <li>
-            <button onClick={handleNextPage}>Next</button>
+            <button onClick={handleNextPage} disabled={paginaActual===numeroPagina.length}>Next</button>
           </li>
         </ul>
       </div>

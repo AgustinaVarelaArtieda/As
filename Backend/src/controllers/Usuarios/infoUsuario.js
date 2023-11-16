@@ -10,7 +10,7 @@ const infoUsuario = async (idAuth) => {
       .populate('impresiones')
 
     usuario.compras = populatedCompra
-
+    
     return usuario;
   };
 
