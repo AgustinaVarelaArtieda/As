@@ -2,12 +2,19 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import {cache} from "../NavBar/NavBar"
 
-export default function Comprar({precio, estoyEnCarrito}){
+export default function Comprar({precio,id ,nombre, cantidad, imagen, estoyEnCarrito}){
     
-    let usuario = cache.get("usuario")
+    const usuario = cache.get("usuario")
 
     const [enCarrito, setEnCarrito] = useState(false)
 
+    const impresion = [{
+        nombre: nombre,
+        imagen: imagen,
+        precioBase: precio,
+        cantidad: cantidad,
+        id: id
+    }]
 
     useEffect(()=>{
         if (estoyEnCarrito === true){
@@ -15,11 +22,14 @@ export default function Comprar({precio, estoyEnCarrito}){
         }
     },[])
 
-    function comprarImpresion(impresion){
+    async function comprarImpresion(usuario){
         //funcion para comprar producto directamente
-        const response = axios.post(`/compra/${usuario}`, impresion)
-        
-        window.location.href = response.data
+        if(!usuario){
+            alert("no te registraste boludon")
+        }else{
+            const response = await axios.post(`/compra/${usuario.idAuth}`, impresion)
+            window.location.href = response.data
+        }
     }
 
     function agregarCarrito(){
@@ -29,7 +39,7 @@ export default function Comprar({precio, estoyEnCarrito}){
     return(
         <div>
             <h1>{precio}</h1>
-            <button onClick={()=>comprarImpresion}>Comprar</button>
+            <button onClick={()=>comprarImpresion(usuario)}>Comprar</button>
             {enCarrito?'':<button onClick={()=>agregarCarrito}>Agregar al Carrito</button>}
         </div>
     )

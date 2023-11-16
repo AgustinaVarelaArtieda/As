@@ -10,15 +10,21 @@ function Cards () {
     const [impresiones, setImpresiones] = useState([]);
 
     const [paginaActual, setPaginaActual]=useState(1)
-    const impresionesPorPagina=10
+    const impresionesPorPagina=6
     const totalImpresiones=20   //Ver como calcular esto (ver de hacer una funcion que me traiga solo la cantidad de elementos que hay en la carpeta impresiones)
+    
+    function paginaFuncion(numero){
+        setPaginaActual(numero)
+    }
 
     const handleImpresion = async () => {
+      const pagina=paginaActual
         if (busqueda) {
-          const response = await axios.get(`/impresiones?nombre=${busqueda.searchInput}&numeroPagina=${paginaActual}&cantidadPorPagina=${impresionesPorPagina}`)
+          const response = await axios.get(`/impresiones?nombre=${busqueda.searchInput}&numeroPagina=${pagina}&cantidadPorPagina=${impresionesPorPagina}`)
           setImpresiones(response.data);
         } else {
-          const response = await axios.get(`/impresiones?numeroPagina=${paginaActual}&cantidadPorPagina=${impresionesPorPagina}`
+          
+          const response = await axios.get(`/impresiones?numeroPagina=${pagina}&cantidadPorPagina=${impresionesPorPagina}`
           );
           setImpresiones(response.data);
         }
@@ -28,11 +34,8 @@ function Cards () {
     useEffect(()=>{
         console.log(busqueda)
         handleImpresion()
-    },[busqueda])
+    },[busqueda, paginaActual])
 
-    function paginaFuncion(numero){
-        setPaginaActual(numero)
-    }
 
     return (
         <div>

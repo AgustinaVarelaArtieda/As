@@ -17,8 +17,8 @@ function App() {
         <Route path= "/detalle/:id" element={<Detail/>}/>
         <Route path="/usuario" element={<PerfilUsuario/>}/>
         <Route path="/nuevaimpresion" element={<NuevaImpresion/>}/>
-        <Route path="/success" element={<Failure/>}/>
-        <Route path="/failure" element={<Success/>}/>
+        <Route path="/success" element={<Success/>}/>
+        <Route path="/failure" element={<Failure/>}/>
      </Routes>
   );
 }

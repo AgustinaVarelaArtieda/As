@@ -1,10 +1,7 @@
-import PropTypes from "prop-types"
 import {useNavigate} from "react-router-dom"
 
 function Card ({impresiones}){
-    Card.propTypes = {
-        impresiones: PropTypes.array.isRequired
-    }
+
 
     const navigate = useNavigate()
     
