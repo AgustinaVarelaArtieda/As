@@ -2,14 +2,14 @@ const mongoose = require("mongoose")
 const {model , Schema} = mongoose
 
 const carrito = new Schema({
-    idUser: String,
-    impresiones:[{
-        nombre:{type:String},
-        imagen:{type:String},
-        precio:{type:Number},
-        cantidad:{type:Number, min:1}
+    impresiones: [{
+        type: Schema.Types.ObjectId,
+        ref: "Impresion"
     }],
-    estado: Boolean,
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 carrito.set("toJSON",{

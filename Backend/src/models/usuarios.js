@@ -11,7 +11,11 @@ const user = new Schema({
     compras:[{
         type: Schema.Types.ObjectId,
         ref: "Compra"
-    }]
+    }],
+    carrito:{
+        type: Schema.Types.ObjectId,
+        ref: "Carrito"
+    }
 })
 
 user.set("toJSON",{
