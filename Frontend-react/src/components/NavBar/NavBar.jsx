@@ -35,7 +35,7 @@ function NavBar(){
             dispatch(setUser(nuevoUsuario))
             cache.set("usuario",nuevoUsuario)
         }
-
+        // eslint-disable-next-line
     },[isAuthenticated, user])
 
     return (
@@ -47,8 +47,8 @@ function NavBar(){
                 <li><NavLink>Contáctanos</NavLink></li>
             </ul>
             <ul>
-                <li><NavLink><img alt='Carrito'/></NavLink></li>
-                {isLoading ? (<div>...</div>) : (isAuthenticated?  <img src={user.picture} alt={user.name} />:(
+                <li><NavLink to="/carrito"><img alt='Carrito'/></NavLink></li>
+                {isLoading ? (<div>...</div>) : (isAuthenticated? (<NavLink to="/usuario"><img src={user.picture} alt={user.name}/></NavLink>):(
                     <li><LoginButton/></li>
                 ))}
             </ul>

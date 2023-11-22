@@ -19,8 +19,8 @@ async function modificarCarrito(idAuth, producto){
                 await Carrito.findByIdAndUpdate(carritoId, {$push:{impresiones:nuevoProducto}},{new:true}).populate('impresiones');
                 break;
             case "eliminar":
-                await Carrito.findByIdAndUpdate(carritoId, {$pull:{impresiones: producto.id}},{new:true});
-                break;
+                const carritoActualizado=await Carrito.findByIdAndUpdate(carritoId, {$pull:{impresiones: producto.id}},{new:true});
+                return carritoActualizado
             case "limpiar":
                 await Carrito.findByIdAndUpdate(carritoId, {impresiones: []},{new:true});
                 break;
