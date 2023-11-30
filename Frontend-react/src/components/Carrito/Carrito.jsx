@@ -7,33 +7,30 @@ function Carrito (){
     const [carrito, setCarrito] = useState([]);
     const usuario = cache.get("usuario")
 
-    async function traerInfo(){
-        const response = await axios.get(`/carrito/info/${usuario.idAuth}`)
-        setCarrito(response.data[0]?.impresiones)
-        console.log(response.data[0]?.impresiones)
-    }
-
     useEffect(()=>{
-        traerInfo()
+        if(usuario){
+            traerInfo()    
+            console.log("traerinfo")
+        }
+        console.log("useeffect")
         // eslint-disable-next-line
     },[])
 
-    let impresiones=[]
-
-    if(carrito & carrito?.length>0){
-        impresiones=carrito[0].impresiones?.map((elemento)=>{
-            return({
+    async function traerInfo(){
+        const response = await axios.get(`/carrito/info/${usuario.idAuth}`)
+        setCarrito(response.data[0]?.impresiones.map((elemento)=>{
+            return {
                 nombre:elemento.nombre,
                 imagen:elemento.imagen,
                 precioBase:elemento.precioBase,
                 cantidad:1,
                 id:elemento.id
-            })
-        })
-    }
+            }
+        }))
+        }
 
     async function comprarImpresion(usuario){
-        const response = await axios.post(`/compra/${usuario}`, impresiones)
+        const response = await axios.post(`/compra/${usuario}`, carrito)
         window.location.href = response.data
         
     }
@@ -47,8 +44,34 @@ function Carrito (){
                 id:id,
                 solicitud: "eliminar"
             })
-            setCarrito(response.data)
+            setCarrito(carrito.filter(el=>el.id!==id))
         }
+    }
+
+    function agregarHandler(id){
+        setCarrito(carrito.map((impresion)=>{
+            if(impresion.id===id){
+                return{
+                    ...impresion,
+                    cantidad:impresion.cantidad+1
+                }
+            }else{
+                return impresion
+            }
+        }))
+    }
+
+    function restarHandler(id){
+        setCarrito(carrito.map((impresion)=>{
+            if(impresion.id===id){
+                return{
+                    ...impresion,
+                    cantidad:impresion.cantidad-1
+                }
+            }else{
+                return impresion
+            }
+        }))
     }
 
     return(
@@ -60,12 +83,12 @@ function Carrito (){
                         return(
                             <div key={impresion.id}>
                                 <p>{impresion.nombre}</p>
-                                <img src={impresion.imagen} alt={impresion.nombre}/>
+                                <img src={impresion?.imagen} alt={impresion.nombre}/>
                                 <p>{impresion.precioBase}</p>
                                 <div className="cantidades">
-                                    <button onClick={()=>{impresion.cantidad=impresion.cantidad-1}} disabled={impresion.cantidad===1}>-</button>
+                                    <button onClick={()=>restarHandler(impresion.id)} disabled={impresion.cantidad===1}>-</button>
                                     <p>{impresion.cantidad}</p>
-                                    <button onClick={()=>{impresion.cantidad=impresion.cantidad+1}}>+</button>
+                                    <button onClick={()=>agregarHandler(impresion.id)}>+</button>
                                 </div>
                                 <button onClick={()=>{eliminarImpresion(usuario.idAuth,impresion.id)}}>Eliminar</button>
                             </div>

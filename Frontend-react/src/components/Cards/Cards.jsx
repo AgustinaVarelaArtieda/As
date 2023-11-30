@@ -32,7 +32,6 @@ function Cards () {
         
 
     useEffect(()=>{
-        console.log(busqueda)
         handleImpresion()
     },[busqueda, paginaActual])
 

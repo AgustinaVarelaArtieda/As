@@ -19,7 +19,7 @@ function App() {
         <Route path="/usuario" element={<PerfilUsuario/>}/>
         <Route path="/carrito" element={<CarritoUsuario/>}/>
         <Route path="/nuevaimpresion" element={<NuevaImpresion/>}/>
-        <Route path="/success" element={<Success/>}/>
+        <Route path="/success/:id" element={<Success/>}/>
         <Route path="/failure" element={<Failure/>}/>
      </Routes>
   );

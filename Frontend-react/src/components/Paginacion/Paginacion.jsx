@@ -22,7 +22,6 @@ function Paginacion(props) {
       paginaFuncion(paginaActual)
     }, [])
     
-    console.log(paginaActual)
     return (
       <div>
         <ul>
