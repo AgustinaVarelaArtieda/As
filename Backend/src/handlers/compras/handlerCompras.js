@@ -34,17 +34,7 @@ const handlerCompras = async (req, res) => {
 
     try {
 
-        const preference = {
-            items: 
-                    arrayProductos
-              ,
-            //rutas del front para redirigir en caso de exito o fallo
-            back_urls: {
-                success: "http://localhost:3000/success",
-                failure: "http://localhost:3000/failure",
-            },
-            auto_return: "approved"
-        }
+        
 
         let total=arrayProductos.reduce((a,e)=>{
            return a+e.unit_price*e.quantity
@@ -59,13 +49,25 @@ const handlerCompras = async (req, res) => {
         const nuevaCompra= new Compra({
             impresiones: arrayProductosIds,
             precioTotal: total,
-            estado: true,
+            estado: false,
             user:  idUsuario
         })
         
         await nuevaCompra.save()
         
         const id = nuevaCompra.id
+
+        const preference = {
+            items: 
+                    arrayProductos
+              ,
+            //rutas del front para redirigir en caso de exito o fallo
+            back_urls: {
+                success: `http://localhost:3000/success/${id}`,
+                failure: "http://localhost:3000/failure",
+            },
+            auto_return: "approved"
+        }
 
         await Compra.findById(id).populate("user").populate("impresiones")
 
@@ -77,6 +79,7 @@ const handlerCompras = async (req, res) => {
         },{
             new: true
         }).populate("compras")    
+
         const {response} = await mercadopago.preferences.create(preference)
 
         res.status(200).json(response.init_point)

@@ -2,7 +2,6 @@ const nuevaImpresion = require("../../controllers/impresiones/postNuevaImpresion
 
 const nuevaImpresionHandler = async (req, res, next) =>{
     const {nombre, imagen, precioBase, rellenoBase, tiempoBase, tamañoBase, estado} = req.body
-    console.log('datos handler',nombre, imagen, precioBase, rellenoBase, tiempoBase, tamañoBase, estado)
     try {
         const newImpresion = await nuevaImpresion(nombre, imagen, precioBase, rellenoBase, tiempoBase, tamañoBase, estado)
         return res.status(201).json(newImpresion)
