@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 import Comprar from "../Comprar/Comprar";
 import Contacto from "../Contacto/Contacto";
 import infoImpresion from "../../utils/infoImpresion";
@@ -41,6 +41,8 @@ function DetalleImpresion(props){
     const precio=detalle.precioBase
     const nombr=detalle.nombre
 
+    
+
     return(
         <div>
             {detalle?.message? <h1>{detalle.message}</h1>
@@ -65,7 +67,7 @@ function DetalleImpresion(props){
                         )
                     })}
                 </>)}
-            <Comprar precio={precio} estoyEnCarrito={false} id={id} imagen={detalle.imagen} nombre={nombr} cantidad={cantidad} />
+            <Comprar precio={precio} id={id} imagen={detalle.imagen} nombre={nombr} cantidad={cantidad} />
             <Contacto nombre={nombr} />
             <div>
                 <button onClick={handleCantidadSuma}>+</button>

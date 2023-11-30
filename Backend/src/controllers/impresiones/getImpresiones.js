@@ -6,7 +6,6 @@ function getAllImpresiones(req,res,next){   //con paginado, filtrado por nombre 
 
     const skip = (parseInt(numeroPagina) - 1) * parseInt(cantidadPorPagina);
     const limite = parseInt(cantidadPorPagina);
-    console.log(numeroPagina)
     const filtrado = {}
     if(nombre){
         filtrado.nombre = { $regex: nombre, $options:'i' } //el options:'i' hace que la busqueda sea insensible a las mayusc

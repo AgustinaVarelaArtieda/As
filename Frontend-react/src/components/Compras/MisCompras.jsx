@@ -10,7 +10,9 @@ export default function MisCompras(props){
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/usuarios/${idAuth}`);
-                setMisCompras(response.data.compras);
+                 let datos = response.data.compras
+                const filtrados = datos.filter((el) => el.estado === true)
+                setMisCompras(filtrados);
             } catch (error) {
                 console.error(error);
             }
@@ -28,7 +30,7 @@ export default function MisCompras(props){
                         <ul>
                         {compra.impresiones?.map((el,index)=>(
                             <li key={index}>
-                                <img src={el.imagen} />
+                                <img src={el.imagen} alt={el.nombre}/>
                             </li>
                         ))}
                         </ul>

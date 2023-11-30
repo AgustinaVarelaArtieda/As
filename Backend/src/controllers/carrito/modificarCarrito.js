@@ -6,7 +6,7 @@ async function modificarCarrito(idAuth, producto){
 
     const solicitud=producto.solicitud
     
-    console.log(solicitud)
+    console.log(producto)
     const usuario= await User.findOne({idAuth}).populate("carrito")
     
     if(!usuario){
@@ -19,7 +19,8 @@ async function modificarCarrito(idAuth, producto){
                 await Carrito.findByIdAndUpdate(carritoId, {$push:{impresiones:nuevoProducto}},{new:true}).populate('impresiones');
                 break;
             case "eliminar":
-                const carritoActualizado=await Carrito.findByIdAndUpdate(carritoId, {$pull:{impresiones: producto.id}},{new:true});
+                const carritoActualizado=await Carrito.findByIdAndUpdate(carritoId, {$pull:{impresiones: producto.id}},{new:true}).populate("impresiones");
+                console.log(carritoActualizado)
                 return carritoActualizado
             case "limpiar":
                 await Carrito.findByIdAndUpdate(carritoId, {impresiones: []},{new:true});

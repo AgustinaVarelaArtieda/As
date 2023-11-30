@@ -6,7 +6,6 @@ function NuevaImpresion(){
     async function cargaDeImpresion(values){
         
         try {
-            console.log('datos front', values)
             const response=await axios.post("/impresiones", values)
             console.log("Se ha creado una impresión")
             console.log(response)
