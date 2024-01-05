@@ -6,7 +6,10 @@ import {useDispatch} from "react-redux"
 import {setUser} from "../../redux/reducers/userReducer"
 import {LocalStorageCache} from "@auth0/auth0-react"
 import axios from 'axios';
-
+import {Avatar, Box, Button, IconButton} from "@mui/material"
+import {AppBar} from '@mui/material';
+import {Container} from '@mui/material'
+import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 export const cache = new LocalStorageCache()
 
 function NavBar(){
@@ -39,20 +42,33 @@ function NavBar(){
     },[isAuthenticated, user])
 
     return (
-        <nav className='menu'>
-            <img alt='Logo A´s impresiones'/>
-            <h1>As Impresiones</h1>
-            <ul>
-                <li><NavLink to= "/impresiones">Productos</NavLink></li>
-                <li><NavLink>Contáctanos</NavLink></li>
-            </ul>
-            <ul>
-                <li><NavLink to="/carrito"><img alt='Carrito'/></NavLink></li>
-                {isLoading ? (<div>...</div>) : (isAuthenticated? (<NavLink to="/usuario"><img src={user.picture} alt={user.name}/></NavLink>):(
-                    <li><LoginButton/></li>
+    <AppBar position='static' sx={{ mb: "1rem"}}>
+            <Container maxWidth = "x1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',}}>
+                <Box
+                sx={{display: "flex", flexDirection: "column"}}>
+                <img alt='Logo A´s impresiones'/>
+                <h5>As Impresiones</h5>
+                </Box>
+            <Box
+                sx={{display: "flex", alignContent: "space-evenly", gap: "7rem"}}>
+                    <Button variant="contained" component = {NavLink} to="/impresiones">
+                        Productos
+                    </Button>
+                    <Button variant='contained'>
+                        Contáctanos
+                    </Button>
+            </Box>
+            <Box 
+            sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                <IconButton aria-label='Shopping cart two tone' size='large' component ={NavLink} to = "/carrito">
+                   <ShoppingCartTwoToneIcon fontSize='inherit'/>
+                </IconButton>
+                {isLoading ? (<div>...</div>) : (isAuthenticated? (<NavLink to="/usuario"><Avatar src={user.picture} alt={user.name}/></NavLink>):(
+                    <LoginButton/>
                 ))}
-            </ul>
-        </nav>
+            </Box>
+            </Container>
+    </AppBar>
     )
 }
 

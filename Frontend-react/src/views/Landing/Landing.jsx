@@ -6,17 +6,14 @@ import { Link } from "react-router-dom";
 function Landing(){
     return(
         <div>
-            <h1>HOLA</h1>
-            <Link to="/nuevaImpresion">
-                <button>formulario</button>
-            </Link>
-            <div>
-            </div>
                 <NavBar/>
             <div>
                 <SearchBar/>
             </div>
             <Carousel/>
+            <Link to="/nuevaImpresion">
+                <button>formulario</button>
+            </Link>
         </div>
     )
 }
