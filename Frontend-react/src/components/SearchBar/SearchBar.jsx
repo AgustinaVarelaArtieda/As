@@ -3,6 +3,11 @@ import {useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {setSearchInput} from "../../redux/reducers/searchReducer1"
 
+import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { IconButton } from "@mui/material";
+
 const SearchBar = () =>{
     const busqueda = useSelector(state => state.search)
     const dispatch = useDispatch()
@@ -20,7 +25,6 @@ const SearchBar = () =>{
         navigate("/impresiones")
         console.log(busqueda)
     }
-    
 
     function handleKeyDown(e){
         if(e.key === "Enter"){
@@ -29,10 +33,17 @@ const SearchBar = () =>{
     }
 
     return (
-        <div>
-            <input type="text" placeholder="Buscar..." value={name} onChange={(e)=>inputHandleChange(e)} onKeyDown={(e)=>handleKeyDown(e)} />
-            <button onClick={(e)=>handleSubmit(e)}>Buscar</button>
-        </div>
+        <Box sx={{ display: 'flex',alignContent:'center', width: '50%', ml:'1rem' }} >   
+            <TextField id="input-name" label="Buscar..." variant="standard" 
+                value={name} 
+                onChange={(e)=>inputHandleChange(e)} 
+                onKeyDown={(e)=>handleKeyDown(e)}
+                sx={{width:'100%'}}
+            />
+            <IconButton color="primary" aria-label="Buscar impresión" sx={{mt:'1rem'}}>
+                <SearchIcon onClick={(e)=>handleSubmit(e)}/>
+            </IconButton>
+        </Box>
     )
 }
 
