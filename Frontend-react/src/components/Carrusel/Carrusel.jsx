@@ -15,28 +15,39 @@ function Carousel(){
         slidesToScroll: 1,
         initialSlide: 0,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 1600,
+        centerMode: true,
+        centerPadding: '1rem',
+        
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 800,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
             }
-        ],
-
+        ]
     }
-
+  
     //busqueda de informacion de las 'cards'
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
         try {
-            const data = await infoProductos(6); 
+            const data = await infoProductos(9); 
             setCards(data);
         } catch (error) {
             console.error(error);
@@ -46,16 +57,17 @@ function Carousel(){
 
         fetchData();
     }, []);
-    
+
     return (
-        <Slider {...settings}>
-            {cards.map((card,index)=>(
-                <div key={index}>
-                    <h3>{card.nombre}</h3>
-                    <img src={card.imagen} alt={card.nombre} width={150} height={200}/>
-                </div>
-            ))}
-        </Slider>
+        <div style={{ backgroundColor: 'aquamarine',margin: '20px', justifyContent: 'center', width: '90%' }}>
+            <Slider {...settings}>
+                {cards.map((card,index)=>(
+                    <div key={index}>
+                        <img src={card.imagen} alt={card.nombre} title={card.nombre} width-max={150} height={200}/>
+                    </div>
+                ))}
+            </Slider>
+        </div>
     )
 }
 
