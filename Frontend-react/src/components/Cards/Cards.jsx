@@ -1,8 +1,10 @@
 import axios from "axios"
 import {useState, useEffect} from "react"
-import Card from "./Card"
+import Impresion from "./Card"
 import Paginacion from "../Paginacion/Paginacion"
 import {useSelector} from "react-redux"
+import Box from "@mui/material/Box"
+
 function Cards () {
     
     const busqueda = useSelector(state => state.search)
@@ -30,17 +32,16 @@ function Cards () {
         }
       };
         
-
     useEffect(()=>{
         handleImpresion()
+        // eslint-disable-next-line
     },[busqueda, paginaActual])
 
-
     return (
-        <div>
-            <Card impresiones ={impresiones} />
+        <Box sx={{mt:'2rem'}}>
+            <Impresion impresiones ={impresiones} />
             <Paginacion paginaFuncion={paginaFuncion} totalImpresiones={totalImpresiones} impresionesPorPagina={impresionesPorPagina} paginaActual={paginaActual}/>
-        </div>
+        </Box>
     )
 }
 
