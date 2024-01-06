@@ -1,51 +1,31 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 function Paginacion(props) {
-  
-
     const { paginaFuncion, totalImpresiones, impresionesPorPagina, paginaActual } = props;
-    
-    const numeroPagina = Array.from({ length: Math.ceil(totalImpresiones / impresionesPorPagina) }, (_, i) => i + 1);
+    const numeroPagina = Math.ceil(totalImpresiones / impresionesPorPagina);
   
-    function handlePrevPage() {
-      const prevPage = paginaActual - 1
-        ;
-      paginaFuncion(prevPage);
-    }
-  
-    function handleNextPage() {
-      const nextPage = paginaActual + 1;
-      paginaFuncion(nextPage);
+    function handlePageChange(event, page) {
+      paginaFuncion(page);
     }
 
     useEffect(()=>{
       paginaFuncion(paginaActual)
+      // eslint-disable-next-line
     }, [])
     
     return (
-      <div>
-        <ul>
-          <li>
-            <button onClick={handlePrevPage} disabled={paginaActual===1}>Prev</button>
-          </li>
-          {numeroPagina.map((numero, index) => {
-            const primeraPagina = index === 0;
-            const ultimaPagina = index === numeroPagina.length - 1;
-            const paginaActiva = numero === paginaActual;
-  
-            return (
-              <li key={index} className={paginaActiva ? "activo" : ""}>
-                <button onClick={() => paginaFuncion(numero)} disabled={paginaActiva}>
-                  {numero}
-                </button>
-              </li>
-            );
-          })}
-          <li>
-            <button onClick={handleNextPage} disabled={paginaActual===numeroPagina.length}>Next</button>
-          </li>
-        </ul>
-      </div>
+      <Stack spacing={2} sx={{mt:'2rem', mb:'2rem', alignItems:'center'}}>
+          <Pagination 
+            color="primary" 
+            count={numeroPagina} 
+            page={paginaActual} 
+            onChange={handlePageChange} 
+            showFirstButton 
+            showLastButton
+          />
+      </Stack>
     );
   }
   
