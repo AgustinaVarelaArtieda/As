@@ -21,7 +21,7 @@ function Carousel(){
         
         responsive: [
             {
-                breakpoint: 800,
+                breakpoint: 980,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
@@ -63,7 +63,7 @@ function Carousel(){
             <Slider {...settings}>
                 {cards.map((card,index)=>(
                     <div key={index}>
-                        <img src={card.imagen} alt={card.nombre} title={card.nombre} width-max={150} height={200}/>
+                        <img src={card.imagen} alt={card.nombre} title={card.nombre} width-max={200} height={300}/>
                     </div>
                 ))}
             </Slider>
