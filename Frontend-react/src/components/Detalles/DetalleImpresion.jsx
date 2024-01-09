@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Comprar from "../Comprar/Comprar";
-import Contacto from "../Contacto/Contacto";
 import infoImpresion from "../../utils/infoImpresion";
 import infoFilamento from "../../utils/infoFilamento"
+import { Box, Divider, Grid, Typography } from "@mui/material";
 
 function DetalleImpresion(props){
 
@@ -27,56 +26,72 @@ function DetalleImpresion(props){
         fetchData();
     },[id])
 
-    function handleCantidadSuma () {
-        setCantidad(cantidad+1)
-
-    }
-
-    function handleCantidadResta (){
-        if (cantidad > 1){
-            setCantidad(cantidad-1)
-        }
-    }
-
     const precio=detalle.precioBase
     const nombr=detalle.nombre
 
     
 
     return(
-        <div>
-            {detalle?.message? <h1>{detalle.message}</h1>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+        }}>
+            {detalle?.message? <Typography variant="body1" color="textSecondary">{detalle.message}</Typography>
             :
-            (<><h1>Detalles</h1>
-            <div>
-                <h1>{detalle.nombre}</h1>
-                <img src={detalle.imagen} alt={detalle.nombre} />
-                <h2>Medidas</h2>
-                <p>Alto:{detalle?.tamañoBase?.z}</p>
-                <p>Ancho:{detalle?.tamañoBase?.x}</p>
-            </div>
-            <h3>Colores disponibles:</h3>
-                {colores.message? <h1>{colores.message}</h1>
-                :
-                (<>
-                    {colores.map((el,index) => {
-                        return(
-                            <div key={index}>
-                                <h4>{el.color}</h4>
-                            </div>
-                        )
-                    })}
-                </>)}
+            (
+            <Grid container spacing={1} sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                maxWidth: "80%",
+                height: "100%",
+                border: 0.5,
+                borderColor: "aqua",
+                mt: "2rem",
+                boxShadow: 3,
+                borderRadius: "16px"
+            }}>
+            <Grid item xs sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}>
+                <Typography variant="h3" sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    padding: "1rem"
+                }}>{detalle.nombre}</Typography>
+                    <Box component="img" src={detalle.imagen} alt={detalle.nombre} sx={{
+                        width: 300,
+                        height: 300,
+                        alignItems:"center"
+                    }}/>
+            </Grid>
+            <Divider orientation= "vertical" sx={{height: 475}}/>
+            <Grid item xs={6} sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                
+            }}>
             <Comprar precio={precio} id={id} imagen={detalle.imagen} nombre={nombr} cantidad={cantidad} />
-            <Contacto nombre={nombr} />
-            <div>
-                <button onClick={handleCantidadSuma}>+</button>
-                <p>{cantidad}</p>
-                <button onClick={handleCantidadResta}>-</button>
-            </div>
-            </>)
-            }
-        </div>
+            </Grid>
+            <Divider  sx={{width: "100%"}}/>
+            <Grid item xs={12} sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "1rem"
+                
+            }}>
+                <Typography variant="h4">Medidas</Typography>
+                <Typography variant="body1">Alto:{detalle?.tamañoBase?.z}</Typography>
+                <Typography variant="body1">Ancho:{detalle?.tamañoBase?.x}</Typography>
+            </Grid>
+        </Grid>
+        )}
+    </Box>
     )
 }
 
