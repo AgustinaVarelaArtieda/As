@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import {cache} from "../NavBar/NavBar"
+import { Typography, IconButton, Button, Box} from "@mui/material"
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+
 
 export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     
@@ -66,10 +70,31 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     }
 
     return(
-        <div>
-            <h1>{precio}</h1>
-            <button onClick={()=>comprarImpresion(usuario)}>Comprar</button>
-            {enCarrito===true?<p>Producto en carrito</p>:<button onClick={()=>agregarCarrito(usuario)}>Agregar al Carrito</button>}
-        </div>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+        }}>
+            <Box sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "1rem",
+                mb: "2rem"
+            }}>
+            <Typography variant="h4"> Precio:</Typography>
+            <Typography variant= "h4">$ {precio}</Typography>
+            </Box>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+            }}>
+            <Button variant="contained" color="primary" endIcon ={<LocalMallIcon/>} onClick={()=>comprarImpresion(usuario)}>Comprar</Button>
+            {enCarrito===true?<Typography variant="body1" color="textSecondary">Producto en carrito</Typography>:<IconButton aria-label="add to shopping cart" onClick={()=>agregarCarrito(usuario)}>
+                <AddShoppingCartIcon/>
+                </IconButton>}
+            </Box>
+        </Box>
     )
 }

@@ -6,7 +6,6 @@ export default function Detail(){
     const { id } = useParams();
     return(
         <div>
-            hola
             <NavBar/>
             <DetalleImpresion id={id}/>
         </div>
