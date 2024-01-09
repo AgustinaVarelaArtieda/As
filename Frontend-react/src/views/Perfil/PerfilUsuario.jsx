@@ -1,10 +1,14 @@
+import Box from "@mui/material/Box";
+import NavBar from "../../components/NavBar/NavBar";
 import Usuario from "../../components/Usuario/Usuario";
 
 export default function PerfilUsuario(){
     return(
-        <div>
-            <h1>Perfil de Usuario</h1>
-            <Usuario/>
-        </div>
+        <Box >
+            <NavBar/> 
+            <Box>
+                <Usuario/>
+            </Box>
+        </Box>
     )
 }
