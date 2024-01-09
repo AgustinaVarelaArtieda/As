@@ -2,6 +2,8 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../LogOut/Logout";
 import MisCompras from "../Compras/MisCompras";
+import Avatar from "@mui/material/Avatar";
+import { Divider, Grid, Typography } from "@mui/material";
 
 const Usuario = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -12,13 +14,30 @@ const Usuario = () => {
 
   return (
     isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <MisCompras idAuth={user.sub}/>
-        <LogoutButton/>
-      </div>
+        <Grid container direction="column" spacing={2} sx={{ mb: ".5rem", pl: "2.5rem", pr: "2rem", pt: ".5rem"}} >
+            <Grid item xs container spacing={2} sx={{mb:"1rem"}}>
+              <Grid item>
+                <Avatar src={user.picture} alt={user.name} sx={{ width: '5rem', height: '5rem' }} variant="rounded"/>
+              </Grid>
+
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item>
+                  <Typography variant="h3" color= "primary">{user.name}</Typography>
+                  <Typography variant="subtitle1" color="text.secondary">{user.email}</Typography>
+                </Grid>
+              </Grid>
+
+              <Grid item>
+                <LogoutButton/>
+              </Grid>
+            </Grid>
+            
+            <Divider/>
+
+            <Grid item xs>                  
+              <MisCompras idAuth={user.sub}/>
+            </Grid>
+        </Grid>
     )
   );
 };
