@@ -1,12 +1,19 @@
+import { Box } from "@mui/material";
 import Carrito from "../../components/Carrito/Carrito";
 import ComprasMayor from "../../components/Contacto/contactoCompras";
 
 function CarritoUsuario (){
     return(
-        <div>
+        <Box>
             <Carrito/>
-            <ComprasMayor/>
-        </div>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}>
+                <ComprasMayor/>
+            </Box>
+        </Box>
     )
 }
 
