@@ -1,10 +1,16 @@
+import { Box, Button, Typography } from "@mui/material"
 function ComprasMayor(){
     return(
-        <div>
-            <h1>Compras por mayor</h1>
-            <p>Si deseas realizar compras mayores a 10 impresiones contactanos con nosotros!</p>
-            <button>Contactar</button>
-        </div>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "2rem"
+        }}>
+            <Typography variant="h5" >Compras por mayor</Typography>
+            <Typography variant="body1">Si deseas realizar compras mayores a 10 impresiones contactanos con nosotros!</Typography>
+            <Button variant="contained">Contactar</Button>
+        </Box>
     )
 }
 
