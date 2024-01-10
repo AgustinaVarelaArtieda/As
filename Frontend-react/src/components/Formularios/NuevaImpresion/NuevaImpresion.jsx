@@ -1,6 +1,44 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 import axios from 'axios';
 
+import * as yup from 'yup';
+
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, FormControlLabel, Switch } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+const validationSchema= yup.object({
+    nombre: yup
+    .string('Escriba el nombre de la impresion')
+    .required('Requerido'),
+    imagen: yup
+    .string('Escriba la URL de la imagen')
+    .required('Requerido'),
+    precioBase: yup
+    .number('Escriba el precio de la impresion')
+    .required('Requerido'),
+    rellenoBase: yup
+    .number('Escriba el relleno de la impresion')
+    .required('Requerido'),
+    tiempoBase: yup
+    .number('Escriba el tiempo de la impresion')
+    .required('Requerido'),
+    tamañoBase: yup
+    .object({
+        x: yup
+        .number('Escriba el tamaño de la impresion')
+        .required('Requerido'),
+        y: yup
+        .number('Escriba el tamaño de la impresion')
+        .required('Requerido'),
+        z: yup
+        .number('Escriba el tamaño de la impresion')
+        .required('Requerido'),
+    })
+    .required('Requerido'),
+    estado: yup
+    .boolean()
+    .required('Requerido'),
+})
 
 function NuevaImpresion(){
     async function cargaDeImpresion(values){
@@ -15,90 +53,132 @@ function NuevaImpresion(){
         }
     }
 
-    return(
-        <div>
-            <Formik
-            initialValues={{
-                nombre: '',
-                imagen: '',
-                precioBase: 0,
-                rellenoBase: 0,
-                tiempoBase: 0,
-                tamañoBase: {
-                    x: 0,
-                    y: 0,
-                    z: 0
-                },
-                estado: true,
-            }}
-
-            validate={values => {
-                const errors = {};
-                if (!values.nombre) {
-                    errors.nombre = 'Requerido';
-                }
-                if (!values.imagen) {
-                    errors.imagen = 'Requerido';
-                }
-                if (!values.precioBase) {
-                    errors.precioBase = 'Requerido';
-                }
-                if (!values.rellenoBase) {
-                    errors.rellenoBase = 'Requerido';
-                }
-                if (!values.tiempoBase) {
-                    errors.tiempoBase = 'Requerido';
-                }
-                if (!values.tamañoBase.x || !values.tamañoBase.y ||!values.tamañoBase.z) {
-                    errors.tamañoBase = 'Requerido';
-                }else if (values.tamañoBase.x<0 || values.tamañoBase.y<0 || values.tamañoBase.z<0) {
-                    errors.tamañoBase = 'No puede ser negativo';
-                }
-
-                return errors;
-            }}
-            onSubmit={(values, {setSubmitting, resetForm})=>{
+    const formik = useFormik({
+        initialValues: {
+            nombre: '',
+            imagen: '',
+            precioBase: 0,
+            rellenoBase: 20,
+            tiempoBase: 0,
+            tamañoBase: {
+                x: 0,
+                y: 0,
+                z: 0
+            },
+            estado: true,
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
                 //coso al back
                 setTimeout(()=>{
                     alert(JSON.stringify(values, null, 2));
                     console.log(values);
-                    setSubmitting(false);
-                    //resetForm()
                     cargaDeImpresion(values)
+                    
                 }, 400);
-            }}
-            >
-            {({isSubmitting})=>(
-                <Form>
-                    <label htmlFor="nombre">Nombre</label>
-                    <Field type="text" name="nombre" />
-                    <ErrorMessage name='nombre' component='div'/>
-                    <label htmlFor="imagen">Imagen</label>
+        },
+        });
+    
+
+    return(
+        <div >          
+                <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+                    <TextField
+                    id="nombre"
+                    name="nombre"
+                    label="Nombre"
+                    value={formik.values.nombre}
+                    onChange={formik.handleChange}
+                    error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+                    helperText={formik.touched.nombre && formik.errors.nombre}
+                    />
+                    <Button component="label" variant='contained' startIcon={<CloudUploadIcon/>}>Cargar imagen</Button>
+                    {/* <label htmlFor="imagen">Imagen</label>
                     <Field type="file" name="imagen" accept="image/*" encType="multipart/form-data"/>
                     <ErrorMessage name='imagen' component='div'/>
-                    <label htmlFor="tamañoBase">Tamaño</label>
-                    <label htmlFor="tamañoBase.x">x</label>
-                    <Field type="number" name="tamañoBase.x" />
-                    <label htmlFor="tamañoBase.y">y</label>
-                    <Field type="number" name="tamañoBase.y" />
-                    <label htmlFor="tamañoBase.z">z</label>
-                    <Field type="number" name="tamañoBase.z" />
-                    <ErrorMessage name='tamañoBase' component='div'/>
-                    <label htmlFor="rellenoBase">RellenoBase</label>
-                    <Field type="number" name="rellenoBase" />
-                    <ErrorMessage name='rellenoBase' component='div'/>
-                    <label htmlFor="tiempoBase">TiempoBase</label>
-                    <Field type="number" name="tiempoBase" />
-                    <ErrorMessage name='tiempoBase' component='div'/>
-                    <label htmlFor="precioBase">precioBase</label>
-                    <Field type="text" name="precioBase" />
-                    <ErrorMessage name='precioBase' component='div'/>
-                    <label htmlFor="estado">Disponible</label>
-                    <Field type="checkbox" name="estado" />
-                    <button type="submit" disabled={isSubmitting}>Submit</button>
-                </Form>
-            )}
-            </Formik>
+                    <label htmlFor="tamañoBase">Tamaño</label> */}
+                    <TextField
+                    id="tamañoBase.x"
+                    name="tamañoBase.x"
+                    label="X"
+                    value={formik.values.tamañoBase.x}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tamañoBase?.x && Boolean(formik.errors.tamañoBase?.x)}
+                    helperText={formik.touched.tamañoBase?.x && formik.errors.tamañoBase?.x}
+                    />
+                    <TextField
+                    id="tamañoBase.y"
+                    name="tamañoBase.y"
+                    label="Y"
+                    value={formik.values.tamañoBase.y}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tamañoBase?.y && Boolean(formik.errors.tamañoBase?.y)}
+                    helperText={formik.touched.tamañoBase?.y && formik.errors.tamañoBase?.y}
+                    />
+                    <TextField
+                    id="tamañoBase.z"
+                    name="tamañoBase.z"
+                    label="Z"
+                    value={formik.values.tamañoBase.z}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tamañoBase?.z && Boolean(formik.errors.tamañoBase?.z)}
+                    helperText={formik.touched.tamañoBase?.z && formik.errors.tamañoBase?.z}
+                    />
+                    <TextField
+                    id="tiempoBase"
+                    name="tiempoBase"
+                    label="Duración"
+                    value={formik.values.tiempoBase}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tiempoBase && Boolean(formik.errors.tiempoBase)}
+                    helperText={formik.touched.tiempoBase && formik.errors.tiempoBase}
+                    />
+                    <TextField
+                    id="precioBase"
+                    name="precioBase"
+                    label="Precio"
+                    value={formik.values.precioBase}
+                    onChange={formik.handleChange}
+                    error={formik.touched.precioBase && Boolean(formik.errors.precioBase)}
+                    helperText={formik.touched.precioBase && formik.errors.precioBase}
+                    />
+                    <FormControl>
+                    <InputLabel>Relleno</InputLabel>
+                    <Select
+                    id="rellenoBase"
+                    name="rellenoBase"
+                    label="Relleno"
+                    value={formik.values.rellenoBase}
+                    onChange={formik.handleChange}
+                    error={formik.touched.rellenoBase && Boolean(formik.errors.rellenoBase)}
+                    helperText={formik.touched.rellenoBase && formik.errors.rellenoBase}
+                    >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={10}>10%</MenuItem>
+                        <MenuItem value={20}>20%</MenuItem>
+                        <MenuItem value={30}>30%</MenuItem>
+                        <MenuItem value={40}>40%</MenuItem>
+                        <MenuItem value={50}>50%</MenuItem>
+                        <MenuItem value={60}>60%</MenuItem>
+                        <MenuItem value={70}>70%</MenuItem>
+                        <MenuItem value={80}>80%</MenuItem>
+                        <MenuItem value={90}>90%</MenuItem>
+                        <MenuItem value={100}>100%</MenuItem>
+                    </Select>
+                    <FormControlLabel value={formik.values.estado}
+                        control={<Switch 
+                        name="estado"
+                        onChange={formik.handleChange}
+                        checked={formik.values.estado}/>}
+
+                        label="Disponible"
+                        labelPlacement="end"
+                    />
+                        
+                    </FormControl>
+                    <Button type="submit">Submit</Button>
+                    <Button type="reset">Reset</Button>
+                </form>
         </div>
     )
 }
