@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import {cache} from "../NavBar/NavBar"
-import { Typography, IconButton, Button, Box} from "@mui/material"
+import { Typography, IconButton, Button, Box, Alert} from "@mui/material"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 
@@ -11,6 +11,7 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     const usuario = cache.get("usuario")
 
     const [enCarrito, setEnCarrito] = useState(false)
+    const [alerta, setAlerta] = useState(null)
 
     
 
@@ -36,7 +37,7 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     async function comprarImpresion(usuario){
         //funcion para comprar producto directamente
         if(!usuario){
-            alert("no te registraste boludon")
+            setAlerta({mensaje: "no te registraste aun!", severidad: "warning"})
         }else{
             const impresion = [{
                 nombre: nombre,
@@ -53,7 +54,7 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     async function agregarCarrito(usuario){
         //funcion para agregar producto al carrito
         if(!usuario){
-            alert("no te registraste boludon")
+            setAlerta({mensaje: "no te registraste aun!", severidad: "warning"})
         }else{
             const agrCarrito={
                 id: id,
@@ -62,19 +63,21 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
             const response =await axios.put(`/carrito/${usuario.idAuth}`, agrCarrito)
             if(response.status===200){
                 setEnCarrito(true)
-                alert("Se agrego 1 impresion al carrito")
+                setAlerta({mensaje: "Se agrego 1 impresion al carrito", severidad: "success"})
             }else{
-                alert("error al agregar al carrito")
+                setAlerta({mensaje:"error al agregar al carrito", severidad: "error"})
             }
         }
     }
 
     return(
+        <div>
+            {alerta && <Alert severity={alerta.severidad}>{alerta.mensaje}</Alert>}
         <Box sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-        }}>
+        }}> 
             <Box sx={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -96,5 +99,6 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
                 </IconButton>}
             </Box>
         </Box>
+        </div>
     )
 }
