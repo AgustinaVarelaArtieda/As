@@ -8,6 +8,7 @@ import Success from "./views/redirecciones/Success";
 import CarritoUsuario from "./views/Carrito/CarritoUsuario";
 import './App.css';
 import NuevaImpresion from "./components/Formularios/NuevaImpresion/NuevaImpresion";
+import Contacto from "./components/Contacto/Contacto";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/nuevaimpresion" element={<NuevaImpresion/>}/>
         <Route path="/success/:id" element={<Success/>}/>
         <Route path="/failure" element={<Failure/>}/>
+        <Route path= "/contacto" element={<Contacto/>}/>
      </Routes>
   );
 }
