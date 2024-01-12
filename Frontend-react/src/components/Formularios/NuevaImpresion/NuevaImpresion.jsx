@@ -1,10 +1,14 @@
 import { useFormik } from 'formik';
 import axios from 'axios';
+import { useState } from 'react';
 
 import * as yup from 'yup';
 
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, FormControlLabel, Switch } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, FormControlLabel, Switch, Grid, Typography, Divider, Input, Avatar, CircularProgress } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import PublishIcon from '@mui/icons-material/Publish';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';;
 
 const validationSchema= yup.object({
     nombre: yup
@@ -41,15 +45,41 @@ const validationSchema= yup.object({
 })
 
 function NuevaImpresion(){
+    const [loading, setLoading] = useState(false);
     async function cargaDeImpresion(values){
-        
         try {
-            const response=await axios.post("/impresiones", values)
+            const response = await axios.post("/impresiones", values)
             console.log("Se ha creado una impresión")
             console.log(response)
 
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    async function changeImagen(e){
+        try {
+            setLoading(true);
+
+            const file = e.target.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append('upload_preset', 'rpahq0n1');
+
+            const response = await fetch('https://api.cloudinary.com/v1_1/dafxyndon/image/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const cloudy = await response.json();
+            const imageUrl = cloudy.secure_url;
+            formik.setFieldValue ('imagen', imageUrl) ;
+            
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
+            console.log("Se ha cambiado la imagen");
         }
     }
 
@@ -69,115 +99,203 @@ function NuevaImpresion(){
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
+            console.log('form', values)
                 //coso al back
-                setTimeout(()=>{
+                setTimeout(()=>{  
                     alert(JSON.stringify(values, null, 2));
-                    console.log(values);
                     cargaDeImpresion(values)
-                    
+                    console.log(values)
                 }, 400);
         },
         });
-    
 
     return(
         <div >          
-                <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
-                    <TextField
-                    id="nombre"
-                    name="nombre"
-                    label="Nombre"
-                    value={formik.values.nombre}
-                    onChange={formik.handleChange}
-                    error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-                    helperText={formik.touched.nombre && formik.errors.nombre}
-                    />
-                    <Button component="label" variant='contained' startIcon={<CloudUploadIcon/>}>Cargar imagen</Button>
-                    {/* <label htmlFor="imagen">Imagen</label>
-                    <Field type="file" name="imagen" accept="image/*" encType="multipart/form-data"/>
-                    <ErrorMessage name='imagen' component='div'/>
-                    <label htmlFor="tamañoBase">Tamaño</label> */}
-                    <TextField
-                    id="tamañoBase.x"
-                    name="tamañoBase.x"
-                    label="X"
-                    value={formik.values.tamañoBase.x}
-                    onChange={formik.handleChange}
-                    error={formik.touched.tamañoBase?.x && Boolean(formik.errors.tamañoBase?.x)}
-                    helperText={formik.touched.tamañoBase?.x && formik.errors.tamañoBase?.x}
-                    />
-                    <TextField
-                    id="tamañoBase.y"
-                    name="tamañoBase.y"
-                    label="Y"
-                    value={formik.values.tamañoBase.y}
-                    onChange={formik.handleChange}
-                    error={formik.touched.tamañoBase?.y && Boolean(formik.errors.tamañoBase?.y)}
-                    helperText={formik.touched.tamañoBase?.y && formik.errors.tamañoBase?.y}
-                    />
-                    <TextField
-                    id="tamañoBase.z"
-                    name="tamañoBase.z"
-                    label="Z"
-                    value={formik.values.tamañoBase.z}
-                    onChange={formik.handleChange}
-                    error={formik.touched.tamañoBase?.z && Boolean(formik.errors.tamañoBase?.z)}
-                    helperText={formik.touched.tamañoBase?.z && formik.errors.tamañoBase?.z}
-                    />
-                    <TextField
-                    id="tiempoBase"
-                    name="tiempoBase"
-                    label="Duración"
-                    value={formik.values.tiempoBase}
-                    onChange={formik.handleChange}
-                    error={formik.touched.tiempoBase && Boolean(formik.errors.tiempoBase)}
-                    helperText={formik.touched.tiempoBase && formik.errors.tiempoBase}
-                    />
-                    <TextField
-                    id="precioBase"
-                    name="precioBase"
-                    label="Precio"
-                    value={formik.values.precioBase}
-                    onChange={formik.handleChange}
-                    error={formik.touched.precioBase && Boolean(formik.errors.precioBase)}
-                    helperText={formik.touched.precioBase && formik.errors.precioBase}
-                    />
-                    <FormControl>
-                    <InputLabel>Relleno</InputLabel>
-                    <Select
-                    id="rellenoBase"
-                    name="rellenoBase"
-                    label="Relleno"
-                    value={formik.values.rellenoBase}
-                    onChange={formik.handleChange}
-                    error={formik.touched.rellenoBase && Boolean(formik.errors.rellenoBase)}
-                    helperText={formik.touched.rellenoBase && formik.errors.rellenoBase}
-                    >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={10}>10%</MenuItem>
-                        <MenuItem value={20}>20%</MenuItem>
-                        <MenuItem value={30}>30%</MenuItem>
-                        <MenuItem value={40}>40%</MenuItem>
-                        <MenuItem value={50}>50%</MenuItem>
-                        <MenuItem value={60}>60%</MenuItem>
-                        <MenuItem value={70}>70%</MenuItem>
-                        <MenuItem value={80}>80%</MenuItem>
-                        <MenuItem value={90}>90%</MenuItem>
-                        <MenuItem value={100}>100%</MenuItem>
-                    </Select>
-                    <FormControlLabel value={formik.values.estado}
-                        control={<Switch 
-                        name="estado"
-                        onChange={formik.handleChange}
-                        checked={formik.values.estado}/>}
-
-                        label="Disponible"
-                        labelPlacement="end"
-                    />
+                <form onSubmit={formik.handleSubmit} onReset={formik.handleReset} encType="multipart/form-data">
+                    <Grid container spacing={2} sx={{m:2}}> 
+                        <Grid item xs={6} sm={8}>                  
+                            <TextField
+                            variant="standard"
+                            fullWidth
+                            sx={{mb:"1rem"}}
+                            id="nombre"
+                            name="nombre"
+                            label="Nombre"
+                            value={formik.values.nombre}
+                            onChange={formik.handleChange}
+                            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+                            helperText={formik.touched.nombre && formik.errors.nombre}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sm={4} sx={{display:'flex', flexDirection:'row'}}>
+                            <Button component="label" variant='contained' sx={{ml:'2rem', mr:'1rem', width: '3rem', height: '3rem'}} size="large">
+                                <AddPhotoAlternateIcon/>
+                                <Input type='file' accept="image/*" name='imagen'
+                                    error={formik.touched.imagen && Boolean(formik.errors.imagen)}
+                                    sx={{display:"none"}}
+                                    onChange={(event)=>changeImagen(event)}
+                                />                                   
+                            </Button>
+                            {loading? <CircularProgress/> :(
+                                <Avatar alt="Imagen seleccionada" variant="rounded" src={formik.values.imagen} sx={{ width: '3rem', height: '3rem' }} />
+                            )}
+                        </Grid>
                         
-                    </FormControl>
-                    <Button type="submit">Submit</Button>
-                    <Button type="reset">Reset</Button>
+                        <Grid item xs={12} sm={6} container spacing={2} sx={{mt:3}}>
+                            <Grid item xs={4}>
+                                <TextField
+                                id="tiempoBase"
+                                name="tiempoBase"
+                                label="Duración"
+                                type="number"
+                                inputProps={{
+                                    inputMode: 'numeric',
+                                    pattern: '[0-9]*',
+                                    min: 0,
+                                }}
+                                InputProps={{
+                                    endAdornment: <InputAdornment position='end'>min</InputAdornment>
+                                }}
+                                value={formik.values.tiempoBase}
+                                onChange={formik.handleChange}
+                                error={formik.touched.tiempoBase && Boolean(formik.errors.tiempoBase)}
+                                helperText={formik.touched.tiempoBase && formik.errors.tiempoBase}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                id="precioBase"
+                                name="precioBase"
+                                label="Precio"
+                                type="number"
+                                inputProps={{
+                                    inputMode: 'numeric',
+                                    pattern: '[0-9]*',
+                                    min: 0,
+                                }}
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                }}
+                                value={formik.values.precioBase}
+                                onChange={formik.handleChange}
+                                error={formik.touched.precioBase && Boolean(formik.errors.precioBase)}
+                                helperText={formik.touched.precioBase && formik.errors.precioBase}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormControl>
+                                    <InputLabel>Relleno</InputLabel>
+                                    <Select
+                                    id="rellenoBase"
+                                    name="rellenoBase"
+                                    label="Relleno"
+                                    value={formik.values.rellenoBase}
+                                    onChange={formik.handleChange}
+                                    >
+                                        <MenuItem value={0}>0</MenuItem>
+                                        <MenuItem value={10}>10%</MenuItem>
+                                        <MenuItem value={20}>20%</MenuItem>
+                                        <MenuItem value={30}>30%</MenuItem>
+                                        <MenuItem value={40}>40%</MenuItem>
+                                        <MenuItem value={50}>50%</MenuItem>
+                                        <MenuItem value={60}>60%</MenuItem>
+                                        <MenuItem value={70}>70%</MenuItem>
+                                        <MenuItem value={80}>80%</MenuItem>
+                                        <MenuItem value={90}>90%</MenuItem>
+                                        <MenuItem value={100}>100%</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                        <Divider orientation='vertical' sx={{height:'auto'}}/>
+                        <Grid item xs={12} sm={5} container spacing={2} >                             
+                            <Grid item xs={12}>
+                                <Typography>Dimensiones</Typography>                         
+                            </Grid>
+                            <Grid item xs container spacing={2}>
+                                <Grid item xs={4}>
+                                    <TextField
+                                    type="number"
+                                    id="tamañoBase.x"
+                                    name="tamañoBase.x"
+                                    label="X"
+                                    inputProps={{
+                                        inputMode: 'numeric',
+                                        pattern: '[0-9]*',
+                                        min: 0,
+                                    }}
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position='end'>cm</InputAdornment>
+                                    }}
+                                    value={formik.values.tamañoBase.x}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.tamañoBase?.x && Boolean(formik.errors.tamañoBase?.x)}
+                                    helperText={formik.touched.tamañoBase?.x && formik.errors.tamañoBase?.x}
+                                    />
+                                </Grid>
+                                
+                                <Grid item xs={4}>
+                                    <TextField
+                                    type="number"
+                                    inputProps={{
+                                        inputMode: 'numeric',
+                                        pattern: '[0-9]*',
+                                        min: 0,
+                                    }}
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position='end'>cm</InputAdornment>
+                                    }}
+                                    id="tamañoBase.y"
+                                    name="tamañoBase.y"
+                                    label="Y"
+                                    value={formik.values.tamañoBase.y}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.tamañoBase?.y && Boolean(formik.errors.tamañoBase?.y)}
+                                    helperText={formik.touched.tamañoBase?.y && formik.errors.tamañoBase?.y}
+                                    />
+                                </Grid>
+                                
+                                <Grid item xs={4}>
+                                    <TextField
+                                    type="number"
+                                    inputProps={{
+                                        inputMode: 'numeric',
+                                        pattern: '[0-9]*',
+                                        min: 0,
+                                    }}
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position='end'>cm</InputAdornment>
+                                    }}
+                                    id="tamañoBase.z"
+                                    name="tamañoBase.z"
+                                    label="Z"
+                                    value={formik.values.tamañoBase.z}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.tamañoBase?.z && Boolean(formik.errors.tamañoBase?.z)}
+                                    helperText={formik.touched.tamañoBase?.z && formik.errors.tamañoBase?.z}
+                                    />
+                                </Grid>
+                            </Grid>
+                            
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControl>
+                                <FormControlLabel value={formik.values.estado}
+                                    control={<Switch 
+                                    name="estado"
+                                    onChange={formik.handleChange}
+                                    checked={formik.values.estado}/>}
+
+                                    label="Disponible"
+                                    labelPlacement="end"
+                                />                    
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button type="submit" startIcon={<PublishIcon/>}>Subir</Button>
+                            <Button type="reset" startIcon={<RefreshIcon/>}>Reset</Button>
+                        </Grid>
+                    </Grid>
                 </form>
         </div>
     )
