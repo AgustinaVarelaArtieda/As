@@ -1,9 +1,9 @@
-import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../LogOut/Logout";
 import MisCompras from "../Compras/MisCompras";
 import Avatar from "@mui/material/Avatar";
 import { Divider, Grid, Typography } from "@mui/material";
+import Admin from "../Admin/Admin";
 
 const Usuario = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -34,8 +34,12 @@ const Usuario = () => {
             
             <Divider/>
 
-            <Grid item xs>                  
-              <MisCompras idAuth={user.sub}/>
+            <Grid item xs>
+              {user.email==="agusvarela5@gmail.com"||user.email==="andresinfernoxii@gmail.com"?
+                <Admin/>
+                :                
+                <MisCompras idAuth={user.sub}/>
+                }                  
             </Grid>
         </Grid>
     )
