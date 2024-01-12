@@ -49,12 +49,18 @@ function NavBar(){
                 <img alt='Logo A´s impresiones'/>
                 <h5>As Impresiones</h5>
                 </Box>
-            <Box
-                sx={{display: "flex", alignContent: "space-evenly", gap: "7rem"}}>
+            <Box sx={{
+                display: "flex",
+                alignContent: "space-evenly"}}>
                     <Button variant="contained" component = {NavLink} to="/impresiones">
                         Productos
                     </Button>
-                    <Button variant='contained'>
+            </Box>
+            <Box sx={{
+                display: "flex",
+                alignContent: "space-evenly",
+            }}>
+                    <Button variant='contained' component= {NavLink} to= "/contacto">
                         Contáctanos
                     </Button>
             </Box>
