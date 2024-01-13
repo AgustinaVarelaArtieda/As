@@ -33,15 +33,15 @@ const SearchBar = () =>{
     }
 
     return (
-        <Box sx={{ display: 'flex',alignContent:'center', width: '50%', ml:'1rem' }} >   
+        <Box sx={{ display: 'flex',alignContent:'center', width: '100%', ml:'1rem', maxWidth:'30rem' }} >   
             <TextField id="input-name" label="Buscar..." variant="standard" 
                 value={name} 
                 onChange={(e)=>inputHandleChange(e)} 
                 onKeyDown={(e)=>handleKeyDown(e)}
                 sx={{width:'100%'}}
             />
-            <IconButton color="primary" aria-label="Buscar impresión" sx={{mt:'1rem'}}>
-                <SearchIcon onClick={(e)=>handleSubmit(e)}/>
+            <IconButton color="primary" aria-label="Buscar impresión" sx={{mt:'1rem'}} onClick={(e)=>handleSubmit(e)}>
+                <SearchIcon />
             </IconButton>
         </Box>
     )

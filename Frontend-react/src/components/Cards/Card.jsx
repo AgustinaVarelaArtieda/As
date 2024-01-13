@@ -17,7 +17,7 @@ function Impresion ({impresiones}){
     return(
         <Grid container spacing={1} justifyContent={"center"}>
         {
-            impresiones.map((el) =>{
+            impresiones?.map((el) =>{
                 return(
                     <Card key={el.id} sx={{ width: 345, height:300 ,m:'.5rem' }}>
                         <CardActionArea>
