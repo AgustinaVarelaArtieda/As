@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Box, IconButton, Typography } from "@mui/material"
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 function ComprasMayor(){
     return(
         <Box sx={{
@@ -8,8 +9,8 @@ function ComprasMayor(){
             padding: "2rem"
         }}>
             <Typography variant="h5" >Compras por mayor</Typography>
-            <Typography variant="body1">Si deseas realizar compras mayores a 10 impresiones contactanos con nosotros!</Typography>
-            <Button variant="contained">Contactar</Button>
+            <Typography variant="body1">Si deseas realizar compras mayores a 10 impresiones contactate con nosotros!</Typography>
+            <IconButton aria-label="whatsapp" component='a' href="https://w.app/2WYxhU" ><WhatsAppIcon sx={{fontSize:'3rem'}} color="success"/></IconButton>
         </Box>
     )
 }
