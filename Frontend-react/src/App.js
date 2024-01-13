@@ -9,6 +9,7 @@ import CarritoUsuario from "./views/Carrito/CarritoUsuario";
 import './App.css';
 import NuevaImpresion from "./components/Formularios/NuevaImpresion/NuevaImpresion";
 import Contacto from "./components/Contacto/Contacto";
+import BusquedaFallida from "./views/BusquedaFallida/BusquedaFallida";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/success/:id" element={<Success/>}/>
         <Route path="/failure" element={<Failure/>}/>
         <Route path= "/contacto" element={<Contacto/>}/>
+        <Route path="/noencontrado" element={<BusquedaFallida/>}/>
      </Routes>
   );
 }
