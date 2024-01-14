@@ -10,6 +10,9 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import PublishIcon from '@mui/icons-material/Publish';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';;
 
+const preset = process.env.PRESET_CLOUDINARY
+const nube = process.env.LINK_CLOUDINARY
+
 const validationSchema= yup.object({
     nombre: yup
     .string('Escriba el nombre de la impresion')
@@ -64,9 +67,9 @@ function NuevaImpresion(){
             const file = e.target.files[0];
             const formData = new FormData();
             formData.append("file", file);
-            formData.append('upload_preset', 'rpahq0n1');
+            formData.append('upload_preset', preset );
 
-            const response = await fetch('https://api.cloudinary.com/v1_1/dafxyndon/image/upload', {
+            const response = await fetch(nube, {
                 method: 'POST',
                 body: formData
             });
