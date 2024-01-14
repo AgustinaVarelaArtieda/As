@@ -13,29 +13,32 @@ function Landing(){
             minHeight: "100vh"
         }}>
                 <NavBar/>
-            <Container sx={{
+            <Box sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                mt : "10rem"
+                mt : "8rem"
             }}>
                 <SearchBar/>     
-            </Container>
-            <Container sx={{
+            </Box>
+            <Box sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                mt: "11rem"
             }}>
                 <Carousel/>
-            </Container>
-            {/* <Link to="/nuevaImpresion">
-                <button>formulario</button>
-            </Link> */}
+            </Box>
             <Box sx={{
                 minHeight: "100h"
             }}>
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    mt : "8.7rem"
+                }}>
                 <Footer/>
+                </Box>
             </Box>
         </Box>
     )

@@ -59,7 +59,7 @@ function Carousel(){
     }, []);
 
     return (
-        <div style={{ backgroundColor: 'aquamarine',margin: '20px', justifyContent: 'center', width: '90%' }}>
+        <div style={{margin: '20px', justifyContent: 'center', width: '92%' }}>
             <Slider {...settings}>
                 {cards.map((card,index)=>(
                     <div key={index}>
