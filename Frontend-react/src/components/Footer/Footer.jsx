@@ -2,11 +2,12 @@ import { AppBar, Box, Toolbar, Typography} from "@mui/material"
 
 function Footer (){
     return (
-            <AppBar position="static" color="transparent">
-                <Toolbar sx={{justifyContent: "space-between"}}>
+            <AppBar  color="info" position="fixed" sx={{top: "auto", bottom:0}} >
+                <Toolbar sx={{justifyContent: "space-between", }}>
                     <Box sx={{
                         display: "flex",
                         flexDirection: "column",
+                        
                         alignItems: "flex-start",
                         }} >
                         <Typography variant = "h6">

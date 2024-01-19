@@ -11,6 +11,7 @@ import {AppBar} from '@mui/material';
 import {Container} from '@mui/material'
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import LogoutButton from '../LogOut/Logout';
 export const cache = new LocalStorageCache()
 
 function NavBar(){
@@ -48,7 +49,7 @@ function NavBar(){
     }
     
     return (
-    <AppBar position='static' sx={{ mb: "1rem"}}>
+    <AppBar position='static' color="inherit" sx={{ mb: "1rem", }}>
             <Container maxWidth = "x1" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',}}>
                 <Box
                 sx={{display: "flex", flexDirection: "column"}}>
@@ -92,8 +93,9 @@ function NavBar(){
                                 transform: isCollapseOpen ?"translateY(0)" : "translateY(-8%)",
                                 opacity: isCollapseOpen ? 1 : 0.7,
                             }}>
-                            <Button variant='contained'>Mis Compras</Button>
-                            <Button variant= "contained" color="error"> Log out</Button>
+                                {user.email === "andresinfernoxii@gmail.com" || user.email === "agusvarela5@gmail.com" ? <Button variant='contained' component = "a" href='/usuario'>Admin</Button>:
+                                <Button variant='contained' component = "a" href='/usuario'>Mis Compras</Button>}
+                            <Button variant= "contained" color="error" component ={LogoutButton}> Log out</Button>
                             </Box>
                         </Collapse>
                     </Box>

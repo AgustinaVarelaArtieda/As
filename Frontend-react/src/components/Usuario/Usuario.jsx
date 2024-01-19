@@ -26,10 +26,6 @@ const Usuario = () => {
                   <Typography variant="subtitle1" color="text.secondary">{user.email}</Typography>
                 </Grid>
               </Grid>
-
-              <Grid item>
-                <LogoutButton/>
-              </Grid>
             </Grid>
             
             <Divider/>

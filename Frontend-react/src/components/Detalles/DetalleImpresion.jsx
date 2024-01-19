@@ -9,7 +9,6 @@ function DetalleImpresion(props){
     const { id } = props;
     
     const [detalle, setDetalle] = useState({});
-    const [colores, setColores] = useState([]);
     const [cantidad, setCantidad] = useState(1)
 
     useEffect(()=>{
@@ -17,8 +16,6 @@ function DetalleImpresion(props){
             try{
                 const data = await infoImpresion(id)
                 setDetalle(data);
-                const filamentos=await infoFilamento()
-                setColores(filamentos)
             }catch(error){
                 setDetalle({message:'error al traer la info del detalle'})
             }
@@ -46,8 +43,6 @@ function DetalleImpresion(props){
                 justifyContent: "center",
                 maxWidth: "80%",
                 height: "100%",
-                border: 0.5,
-                borderColor: "aqua",
                 mt: "2rem",
                 boxShadow: 3,
                 borderRadius: "16px"
