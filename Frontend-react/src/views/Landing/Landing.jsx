@@ -28,18 +28,15 @@ function Landing(){
             }}>
                 <Carousel/>
             </Box>
-            <Box sx={{
-                minHeight: "100h"
-            }}>
                 <Box sx={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    mt : "8.7rem"
+                    mt : "8.7rem",
+                    height:'100%'
                 }}>
                 <Footer/>
                 </Box>
-            </Box>
         </Box>
     )
 }

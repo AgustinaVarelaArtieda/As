@@ -16,15 +16,16 @@ export default function Comprar({precio,id ,nombre, cantidad, imagen}){
     
 
     async function estoy(id){
-        const response = await axios.get(`/carrito/info/${usuario.idAuth}`)
-        console.log(response.data[0]?.impresiones)
-        response.data[0]?.impresiones.map(l=>{
-            if(l.id===id){
-                setEnCarrito(true)
-                console.log("en carrito")
-            }
-        })
-        console.log(enCarrito)
+        if(usuario?.idAuth){
+            const response = await axios.get(`/carrito/info/${usuario.idAuth}`)
+            console.log(response.data[0]?.impresiones)
+            response.data[0]?.impresiones.map(l=>{
+                if(l.id===id){
+                    setEnCarrito(true)
+                    console.log("en carrito")
+                }
+            })
+        }
     }
 
     
