@@ -1,15 +1,19 @@
 const express = require("express")
+const bodyParser = require ("body-parser")
+const cookieParser = require ("cookie-parser")
 const cors = require("cors")
 const app = express()
 
+const routes = require ("./src/routes/index")
+
+const notFound = require('./middlewares/notFound')
+const errorHandler = require('./middlewares/errorHandler')
+const requestLoguer = require('./middlewares/requestLoguer')
+
 require("dotenv").config()
-const {USER,PASSWORD} = process.env
+const {USER,PASSWORD, PORT} = process.env
 
 const mongoose = require("mongoose")
-const {Schema} = mongoose
-
-app.use(cors())
-app.use(express.json())
 
 mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@cluster0.rpunaol.mongodb.net/impresiones3D?retryWrites=true&w=majority`,{
     useNewUrlParser: true,
@@ -20,53 +24,22 @@ mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@cluster0.rpunaol.mongodb.net
     console.log(err)
 })
 
+app.use(cors())
+app.use(express.json())
 
-const impresion = new Schema({
-    nombre: String,
-    imagen: String,
-    precioBase: Number,
-    rellenoBase: Number,
-    tiempoBase: Number,
-    tamañoBase:{
-        x: {type: Number, min: 0},
-        y: {type: Number, min: 0},
-        z: {type: Number, min: 0}
-    },
-    estado: Boolean,
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' })); //Establece la opción extended en true para permitir datos anidados en los cuerpos de las solicitudes y establece un límite de tamaño de 50 MB para los cuerpos de las solicitudes.
+app.use(bodyParser.json({ limit: '50mb' })); //También se establece un límite de tamaño de 50 MB para los cuerpos de las solicitudes.
+app.use(cookieParser()); //para analizar las cookies en las solicitudes entrantes.
+app.use(requestLoguer);
+
+//Midlewares para rutas
+app.use('/asImpresiones', routes);
+
+//Midlewares para errores. !!En la parte de catch utilizar error=>next(error)
+app.use(notFound)
+app.use(errorHandler)
+
+app.listen(PORT,()=>{
+    console.log(`Servidor corriendo en el puerto ${PORT}`)
 })
 
-const filamento = new Schema({
-    color: String,
-    tipo: String,
-    estado: Boolean,
-})
-
-const user = new Schema({
-    nombre: String,
-    password: String,
-    idAuth: String,
-    email: String,
-    avatar: String,
-    estado: Boolean,
-    rol: String,
-})
-
-const compras = new Schema({
-    idUser: String,
-    impresiones: [{
-        type: String
-    }],
-    precioTotal: Number,
-    estado: Boolean,
-})
-
-const carrito = new Schema({
-    idUser: String,
-    impresiones:[{
-        nombre:{type:String},
-        imagen:{type:String},
-        precio:{type:Number},
-        cantidad:{type:Number, min:1}
-    }],
-    estado: Boolean,
-})
