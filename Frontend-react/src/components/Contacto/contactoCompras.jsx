@@ -10,7 +10,7 @@ function ComprasMayor(){
         }}>
             <Typography variant="h5" >Compras por mayor</Typography>
             <Typography variant="body1">Si deseas realizar compras mayores a 10 impresiones contactate con nosotros!</Typography>
-            <IconButton aria-label="whatsapp" component='a' href="https://w.app/2WYxhU" ><WhatsAppIcon sx={{fontSize:'3rem'}} color="success"/></IconButton>
+            <IconButton aria-label="whatsapp" component='a' href="https://wa.link/5ltcd0" ><WhatsAppIcon sx={{fontSize:'3rem'}} color="success"/></IconButton>
         </Box>
     )
 }

@@ -23,7 +23,7 @@ export default function Contacto(){
                 m: "2rem",
 
             }}>
-                <IconButton aria-label= "whatsapp" component="a" href=" https://w.app/2WYxhU"><WhatsAppIcon sx={{ fontSize: "8rem"}}/></IconButton>
+                <IconButton aria-label= "whatsapp" component="a" href=" https://wa.link/5ltcd0"><WhatsAppIcon sx={{ fontSize: "8rem"}}/></IconButton>
             </Box>
             <Box sx={{
                 display: "flex",
