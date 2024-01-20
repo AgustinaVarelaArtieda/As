@@ -16,12 +16,17 @@ function getAllImpresiones(req,res,next){   //con paginado, filtrado por nombre 
         .skip(skip)
         .limit(limite)
         .then((impresiones)=>{
-
             if(impresiones.length<1){
                 console.log('No hay impresiones guardadas con esas caracteristicas')
                 return res.status(204).json('No hay impresiones guardadas con esas caracteristicas')    //revisar esta respuesta
             }else{
-                return res.status(200).json(impresiones)
+              let totalImpresiones = 0
+              if(nombre){
+                totalImpresiones = impresiones.length
+              }else{
+                totalImpresiones = 21;
+              }
+                return res.status(200).json({totalImpresiones,impresiones})
             }
         })
         .catch((error)=>{
