@@ -9,7 +9,6 @@ export default function Detail(){
         <div>
             <NavBar/>
             <DetalleImpresion id={id}/>
-            <Footer/>
         </div>
     )
 }
