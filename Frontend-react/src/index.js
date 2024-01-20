@@ -11,7 +11,7 @@ import App from './App';
 
 import './index.css';
 
-axios.defaults.baseURL = "http://localhost:3001/asImpresiones"
+axios.defaults.baseURL = "http://as-production-de6e.up.railway.app/"
 
 const store = configureStore({
   reducer: rootReducer
