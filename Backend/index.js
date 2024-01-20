@@ -8,7 +8,6 @@ const routes = require ("./src/routes/index")
 
 const notFound = require('./middlewares/notFound')
 const errorHandler = require('./middlewares/errorHandler')
-const requestLoguer = require('./middlewares/requestLoguer')
 
 require("dotenv").config()
 const {USER,PASSWORD, PORT} = process.env
